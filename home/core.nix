@@ -45,6 +45,8 @@
     shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
     yadm # Yet Another Dotfiles Manager
 
+    arkade # Kubernetes apps installer
+
     (callPackage ./balena-cli.nix { })
   ];
 

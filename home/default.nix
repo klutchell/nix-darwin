@@ -7,6 +7,7 @@ in
   # import sub modules
   imports = [
     ./bash.nix
+    ./balena.nix
     ./core.nix
     ./git.nix
     ./starship.nix
