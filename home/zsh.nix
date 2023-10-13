@@ -1,16 +1,14 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{ pkgs, ... }:
+{
   programs.zsh = {
     enable = true;
 
     enableCompletion = true;
     enableAutosuggestions = true;
-    syntaxHighlighting = {
-      enable = true;
-    };
+    # syntaxHighlighting = {
+    #   enable = true;
+    # };
+    enableSyntaxHighlighting = true;
     
     autocd = true;
 
@@ -46,10 +44,10 @@
     };
 
     shellAliases = {
-      ll = "ls -l";
-      hms = "home-manager switch";
+      # ll = "ls -l";
+      # hms = "home-manager switch";
       balena-staging = "BALENARC_BALENA_URL=balena-staging.com BALENARC_DATA_DIRECTORY=~/.balenaStaging balena";
-      gpt-review = "CONTEXT_FILE=${config.home.homeDirectory}/azure.yaml OPENAI_API_KEY=$(cat ${config.home.homeDirectory}/.openai_pat) gpt-review";
+      # gpt-review = "CONTEXT_FILE=${config.home.homeDirectory}/azure.yaml OPENAI_API_KEY=$(cat ${config.home.homeDirectory}/.openai_pat) gpt-review";
     };
 
     localVariables = {

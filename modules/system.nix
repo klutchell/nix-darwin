@@ -19,7 +19,7 @@
     '';
 
     defaults = {
-      menuExtraClock.Show24Hour = true;  # show 24 hour clock
+      menuExtraClock.Show24Hour = false;  # show 24 hour clock
 
       # other macOS's defaults configuration.
       # ......

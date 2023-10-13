@@ -13,13 +13,13 @@ darwin:
 	nix build .#darwinConfigurations.mercury.system \
 		--extra-experimental-features 'nix-command flakes'
 
-	./result/sw/bin/darwin-rebuild switch --flake .#hostname
+	./result/sw/bin/darwin-rebuild switch --flake .#mercury
 
 darwin-debug:
 	nix build .#darwinConfigurations.mercury.system --show-trace --verbose \
 		--extra-experimental-features 'nix-command flakes'
 
-	./result/sw/bin/darwin-rebuild switch --flake .#hostname --show-trace --verbose
+	./result/sw/bin/darwin-rebuild switch --flake .#mercury --show-trace --verbose
 
 ############################################################################
 #
@@ -29,6 +29,9 @@ darwin-debug:
 
 update:
 	nix flake update
+
+update-commit: 
+	nix flake update --commit-lock-file
 
 history:
 	nix profile history --profile /nix/var/nix/profiles/system
