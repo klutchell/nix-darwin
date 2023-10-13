@@ -1,9 +1,6 @@
-{ homeage, ... }:
-
-let
+{homeage, ...}: let
   username = "kyle";
-in
-{
+in {
   # import sub modules
   imports = [
     homeage.homeManagerModules.homeage

@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.zsh = {
     enable = true;
 
@@ -9,7 +8,7 @@
     #   enable = true;
     # };
     enableSyntaxHighlighting = true;
-    
+
     autocd = true;
 
     # # https://checkoway.net/musings/nix/

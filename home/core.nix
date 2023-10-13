@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     nnn # terminal file manager
 
@@ -46,8 +44,9 @@
     # yadm # Yet Another Dotfiles Manager
 
     arkade # Kubernetes apps installer
+    alejandra # The Uncompromising Nix Code Formatter
 
-    (callPackage ./balena-cli.nix { })
+    (callPackage ./balena-cli.nix {})
   ];
 
   programs = {

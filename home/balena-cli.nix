@@ -1,5 +1,5 @@
 # https://github.com/pipex/nixpkgs/blob/macbook/balena-cli.nix
-{ pkgs ? import <nixpkgs> { } }:
+{pkgs ? import <nixpkgs> {}}:
 pkgs.stdenv.mkDerivation rec {
   name = "balena-cli";
   version = "17.1.5";
@@ -12,8 +12,8 @@ pkgs.stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/balena-cli
-    mkdir -p $out/bin 
+    mkdir -p $out/bin
     cp -r * $out/balena-cli
-    ln -s $out/balena-cli/balena $out/bin/balena 
+    ln -s $out/balena-cli/balena $out/bin/balena
   '';
 }
