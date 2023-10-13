@@ -88,7 +88,7 @@
       cm = "commit -m";
       ca = "commit -am";
       dc = "diff --cached";
-      amend = "commit --amend -m";
+      amend = "commit --amend '-S'";
 
       # aliases for submodule
       update = "submodule update --init --recursive";

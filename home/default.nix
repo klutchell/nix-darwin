@@ -1,4 +1,4 @@
-{ ... }:
+{ homeage, ... }:
 
 let
   username = "kyle";
@@ -6,6 +6,7 @@ in
 {
   # import sub modules
   imports = [
+    homeage.homeManagerModules.homeage
     ./bash.nix
     ./balena.nix
     ./core.nix
