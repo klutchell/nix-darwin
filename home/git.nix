@@ -19,6 +19,15 @@
     userName = "Kyle Harding";
     userEmail = "kyle@balena.io";
 
+    ignores = [
+      ".DS_Store"
+      "*.pyc"
+      "node_modules/"
+      ".envrc"
+      ".direnv*"
+      ".devenv*"
+    ];
+
     # includes = [
     #   {
     #     # use diffrent email & name for work
