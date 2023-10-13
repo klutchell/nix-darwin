@@ -13,31 +13,55 @@
 
   programs.git = {
     enable = true;
-    lfs.enable = true;
+    # lfs.enable = true;
+    package = pkgs.gitAndTools.gitFull;
 
-    # TODO replace with your own name & email
-    userName = "your name";
-    userEmail = "xxx@example.com";
+    userName = "Kyle Harding";
+    userEmail = "kyle@balena.io";
 
-    includes = [
-      {
-        # use diffrent email & name for work
-        path = "~/work/.gitconfig";
-        condition = "gitdir:~/work/";
-      }
-    ];
+    # includes = [
+    #   {
+    #     # use diffrent email & name for work
+    #     path = "~/work/.gitconfig";
+    #     condition = "gitdir:~/work/";
+    #   }
+    # ];
 
     extraConfig = {
-      init.defaultBranch = "main";
-      push.autoSetupRemote = true;
-      pull.rebase = true;
+      core = {
+        editor = "nano";
+      };
+      color = {
+        ui = true;
+      };
+      push = {
+        default = "current";
+        autoSetupRemote = true;
+      };
+      pull = {
+        ff = "only";
+        rebase = true;
+      };
+      init = {
+        defaultBranch = "main";
+      };
+      sendemail = {
+        from = "Kyle Harding <kyle@balena.io>";
+        chainreplyto = false;
+        smtpencryption = "tls";
+        smtpserver = "smtp.gmail.com";
+        smtpserverport = 587;
+        smtpuser = "kyle@balena.io";
+      };
     };
 
-    # signing = {
-    #   key = "xxx";
-    #   signByDefault = true;
-    # };
+    signing = {
+      key = "FD3EB16D2161895A";
+      signByDefault = true;
+    };
 
+    # https://nix-community.github.io/home-manager/options.html#opt-programs.git.delta.enable
+    # https://github.com/dandavison/delta
     delta = {
       enable = true;
       options = {
