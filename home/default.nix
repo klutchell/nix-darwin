@@ -11,6 +11,7 @@ in
     ./core.nix
     ./git.nix
     ./starship.nix
+    ./zsh.nix
   ];
 
   # Home Manager needs a bit of information about you and the
