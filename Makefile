@@ -3,7 +3,6 @@
 #    otherwise the target will not be executed!
 #
 
-
 ############################################################################
 #
 #  Darwin related commands
@@ -28,7 +27,6 @@ darwin-debug:
 #
 ############################################################################
 
-
 update:
 	nix flake update
 
@@ -41,7 +39,6 @@ gc:
 
 	# garbage collect all unused nix store entries
 	sudo nix store gc --debug
-
 
 fmt:
 	# format the nix files in this repo
