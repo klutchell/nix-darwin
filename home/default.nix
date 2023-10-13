@@ -1,7 +1,6 @@
 { ... }:
 
 let
-  # please replace xxx with your username
   username = "kyle";
 in
 {
