@@ -10,20 +10,14 @@
 #
 ############################################################################
 
-#  TODO Feel free to remove this target if you don't need a proxy to speed up the build process
-darwin-set-proxy:
-	sudo python3 scripts/darwin_set_proxy.py
-
-darwin: darwin-set-proxy
-	# TODO update hostname here!
-	nix build .#darwinConfigurations.hostname.system \
+darwin:
+	nix build .#darwinConfigurations.mercury.system \
 		--extra-experimental-features 'nix-command flakes'
 
 	./result/sw/bin/darwin-rebuild switch --flake .#hostname
 
-darwin-debug: darwin-set-proxy
-	# TODO update hostname here!
-	nix build .#darwinConfigurations.hostname.system --show-trace --verbose \
+darwin-debug:
+	nix build .#darwinConfigurations.mercury.system --show-trace --verbose \
 		--extra-experimental-features 'nix-command flakes'
 
 	./result/sw/bin/darwin-rebuild switch --flake .#hostname --show-trace --verbose

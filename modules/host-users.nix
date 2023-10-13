@@ -8,9 +8,8 @@
 #############################################################
 
 let
-  # TODO change this to your hostname
-  hostname = "your-hostname";
-  username = "xxx";
+  hostname = "mercury";
+  username = "kyle";
 in
 {
   networking.hostName = hostname;
