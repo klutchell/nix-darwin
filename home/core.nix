@@ -44,6 +44,8 @@
     shellcheck # shell script analysis tool
     shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
     yadm # Yet Another Dotfiles Manager
+
+    (callPackage ./balena-cli.nix { })
   ];
 
   programs = {
