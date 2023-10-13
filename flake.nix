@@ -35,6 +35,15 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
+
+    # https://github.com/ryantm/agenix#install-via-flakes
+    agenix = {
+      url = "github:ryantm/agenix";
+      # optional, not necessary for the module
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      # optionally choose not to download darwin deps (saves some resources on Linux)
+      #inputs.agenix.inputs.darwin.follows = "";
+    };
   };
 
   # The `outputs` function will return all the build results of the flake. 
@@ -42,7 +51,7 @@
   # parameters in `outputs` are defined in `inputs` and can be referenced by their names. 
   # However, `self` is an exception, this special parameter points to the `outputs` itself (self-reference)
   # The `@` syntax here is used to alias the attribute set of the inputs's parameter, making it convenient to use inside the function.
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, ... }:{
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, agenix, ... }:{
     darwinConfigurations.mercury = darwin.lib.darwinSystem {
       system = "aarch64-darwin";  # change this to "aarch64-darwin" if you are using Apple Silicon
       modules = [
@@ -50,6 +59,12 @@
         ./modules/system.nix
         ./modules/apps.nix
         ./modules/host-users.nix
+
+        # https://github.com/ryantm/agenix#install-via-flakes
+        agenix.nixosModules.default
+        {
+          environment.systemPackages = [ agenix.packages.aarch64-darwin.default ];
+        }
 
         # home manager
         home-manager.darwinModules.home-manager

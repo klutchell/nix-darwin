@@ -9,6 +9,9 @@
 #
 ############################################################################
 
+deploy:
+	$(MAKE) darwin
+
 darwin:
 	nix build .#darwinConfigurations.mercury.system \
 		--extra-experimental-features 'nix-command flakes'

@@ -1,20 +1,17 @@
-# Nix Darwin Kickstarter - Rich Demo
+# nix-darwin-config
 
-A rich demo that contains a lot of configuration that can be used as a reference for your own configuration, but it may **OVERWRITE** your system configuration, 
-so **DO NOT** deploy it to your own system directly.
+Based on [nix-darwin-kickstarter](https://github.com/ryan4yin/nix-darwin-kickstarter) by @ryan4yin
 
+I have customized this template to my own needs, DO NOT deploy it to your system directly!
 
-## How to Start
+## Getting Started
 
-1. Start your nix-darwin journey by following the [minimal](../minimal) configuration.
-2. Read all the files in this repository, and understand what they do.
-   1. If you have trouble understanding, [ryan4yin/nixos-and-flakes-book](https://github.com/ryan4yin/nixos-and-flakes-book) is a good resource to learn nix and flakes.
-3. Copy and CUSTOMIZE the configuration you need from this demo to your own configuration.
-4. Run `make deploy` in the root of your nix configuration to deploy your configuration.
+1. Clone this project to `~/.config/nix-darwin`
+2. Run `make deploy` in the root to build and deploy
 
 ## Configuration Structure
 
-Your current nix-darwin configuration's structure should be as follows:
+The nix-darwin configuration's structure should be as follows:
 
 ```bash
 › tree
@@ -37,14 +34,3 @@ Your current nix-darwin configuration's structure should be as follows:
 └── scripts
     └── darwin_set_proxy.py  # a script to set http proxy for nix & homebrew.
 ```
-
-## Notes on Network Proxy
-
-If you are in a network environment that requires proxy(such as China), you may need to set up proxy for nix and homebrew.
-
-Please refer to the `rich-demo` folder for more details:
-
-- [rich-demo/scripts/darwin_set_proxy.py](https://github.com/ryan4yin/nix-darwin-kickstarter/blob/main/rich-demo/scripts/darwin_set_proxy.py)
-- [rich-demo/Makefile](https://github.com/ryan4yin/nix-darwin-kickstarter/blob/main/rich-demo/Makefile)
-- [rich-demo - homebrew's mirror settings](https://github.com/ryan4yin/nix-darwin-kickstarter/blob/main/rich-demo/modules/apps.nix#L26-L34)
-

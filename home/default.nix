@@ -10,6 +10,7 @@ in
     ./balena.nix
     ./core.nix
     ./git.nix
+    ./secrets.nix
     ./starship.nix
     ./zsh.nix
   ];
