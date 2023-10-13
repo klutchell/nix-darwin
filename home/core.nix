@@ -30,7 +30,7 @@
     gnutar
     gawk
     zstd
-    caddy
+    # caddy
     gnupg
 
     # productivity
@@ -43,7 +43,7 @@
     nodejs-18_x # A JavaScript runtime built on Chrome's V8 JavaScript engine
     shellcheck # shell script analysis tool
     shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
-    yadm # Yet Another Dotfiles Manager
+    # yadm # Yet Another Dotfiles Manager
 
     arkade # Kubernetes apps installer
 
