@@ -11,17 +11,17 @@
 
     autocd = true;
 
-    # # https://checkoway.net/musings/nix/
-    # envExtra = ''
-    #   [[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
-    # '';
+    # https://checkoway.net/musings/nix/
+    envExtra = ''
+      [[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
+    '';
 
-    # # https://checkoway.net/musings/nix/
-    # profileExtra = ''
-    #   # Set PATH, MANPATH, etc., for Homebrew.
-    #   eval "$(/opt/homebrew/bin/brew shellenv)"
-    #   # export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
-    # '';
+    # https://checkoway.net/musings/nix/
+    profileExtra = ''
+      # Set PATH, MANPATH, etc., for Homebrew.
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+      # export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
+    '';
 
     # initExtra = ''
     #   # Nix
