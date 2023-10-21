@@ -11,10 +11,10 @@
 
     autocd = true;
 
-    # https://checkoway.net/musings/nix/
-    envExtra = ''
-      [[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
-    '';
+    # # https://checkoway.net/musings/nix/
+    # envExtra = ''
+    #   [[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
+    # '';
 
     # https://checkoway.net/musings/nix/
     profileExtra = ''
