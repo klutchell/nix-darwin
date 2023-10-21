@@ -74,9 +74,9 @@
     # https://github.com/dandavison/delta
     delta = {
       enable = true;
-      options = {
-        features = "side-by-side";
-      };
+      # options = {
+      #   features = "side-by-side";
+      # };
     };
 
     aliases = {
