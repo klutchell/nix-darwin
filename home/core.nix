@@ -46,7 +46,7 @@
     arkade # Kubernetes apps installer
     alejandra # The Uncompromising Nix Code Formatter
 
-    (callPackage ./balena-cli.nix {})
+    (callPackage ../pkgs/balena-cli.nix {})
   ];
 
   programs = {
