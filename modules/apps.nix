@@ -82,7 +82,6 @@
       "macfuse"
       "openinterminal-lite"
       "openvpn-connect"
-      "orion"
       "protonvpn"
       "raspberry-pi-imager"
       "signal"
