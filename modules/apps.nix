@@ -75,7 +75,6 @@
       "discord"
       "docker"
       "eloston-chromium"
-      "google-drive"
       "hyper"
       "logseq"
       "macfuse"
