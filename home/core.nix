@@ -46,6 +46,8 @@
     arkade # Kubernetes apps installer
     alejandra # The Uncompromising Nix Code Formatter
 
+    bitwarden-cli # The command line vault (Windows, macOS, & Linux).
+
     (callPackage ../pkgs/balena-cli.nix {})
   ];
 
