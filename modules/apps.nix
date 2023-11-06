@@ -82,6 +82,7 @@
       "openvpn-connect"
       "protonvpn"
       "raspberry-pi-imager"
+      "raycast"
       "signal"
       "spotify"
       "tailscale"
