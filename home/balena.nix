@@ -3,10 +3,54 @@
   lib,
   pkgs,
   ...
-}: {
+}: 
+
+let
+  balena-eks = pkgs.writeText "balena-eks" ''
+    # This is a script which should be sourced
+
+    profile="$1"
+
+    unset AWS_PROFILE
+
+    case $profile in
+    balena-playground)
+      context="playground-eks"
+      idp_arn="arn:aws:iam::240706700173:saml-provider/Google"
+      role_arn="arn:aws:iam::240706700173:role/federated-admin"
+      ;;
+    balena-production)
+      context="production-eks"
+      idp_arn="arn:aws:iam::491725000532:saml-provider/Google"
+      role_arn="arn:aws:iam::491725000532:role/federated-admin"
+      ;;
+    balena-staging)
+      context="staging-eks"
+      idp_arn="arn:aws:iam::567579488761:saml-provider/Google"
+      role_arn="arn:aws:iam::567579488761:role/federated-admin"
+      ;;
+    *)
+      echo "Usage: balena-eks <balena-playground|balena-production|balena-staging>"
+      return 1
+      ;;
+    esac
+
+    aws-saml \
+      --profile "$profile" \
+      --region us-east-1 \
+      --session-duration 43200 \
+      --idp-arn "$idp_arn" \
+      --role-arn "$role_arn"
+
+    export AWS_PROFILE="$profile"
+    aws eks update-kubeconfig --name "$context"
+    kubectl config use-context "$context"
+    return
+  '';
+in {
   home.packages = with pkgs; [
     awscli2
-    aws-google-auth
+    # aws-google-auth
     k9s
     kubectl
     # saml2aws
@@ -31,86 +75,13 @@
           ];
         })
       ]))
-
-    (writeShellScriptBin "balena-aws-production" ''
-      set -e
-      unset AWS_PROFILE
-
-      # aws-google-auth \
-      #   -p balena-production \
-      #   -r arn:aws:iam::491725000532:role/federated-admin \
-      #   -R us-east-1 -I C04e1utuw -S 447476946884 \
-      #   -k --bg-response None -l debug
-
-      aws-saml \
-        --profile balena-production \
-        --region us-east-1 \
-        --session-duration 43200 \
-        --idp-arn arn:aws:iam::491725000532:saml-provider/Google \
-        --role-arn arn:aws:iam::491725000532:role/federated-admin
-
-      export AWS_PROFILE="balena-production"
-
-      aws --profile balena-production eks --region us-east-1 update-kubeconfig \
-        --name production-eks --alias production-eks
-
-      kubectl config use-context production-eks
-
-      echo "Environment set to balena-production!"
-    '')
-
-    (writeShellScriptBin "balena-aws-staging" ''
-      set -e
-      unset AWS_PROFILE
-
-      # aws-google-auth \
-      #   -p balena-staging \
-      #   -r arn:aws:iam::567579488761:role/federated-admin \
-      #   -R us-east-1 -I C04e1utuw -S 447476946884 \
-      #   -k --bg-response None -l debug
-
-      aws-saml \
-        --profile balena-staging \
-        --region us-east-1 \
-        --session-duration 43200 \
-        --idp-arn arn:aws:iam::567579488761:saml-provider/Google \
-        --role-arn arn:aws:iam::567579488761:role/federated-admin
-
-      export AWS_PROFILE="balena-staging"
-
-      aws --profile balena-staging eks --region us-east-1 update-kubeconfig \
-        --name staging-eks --alias staging-eks
-
-      kubectl config use-context staging-eks
-
-      echo "Environment set to balena-staging!"
-    '')
-
-    (writeShellScriptBin "balena-aws-playground" ''
-      set -e
-      unset AWS_PROFILE
-
-      # aws-google-auth \
-      #   -p balena-playground \
-      #   -r arn:aws:iam::240706700173:role/federated-admin \
-      #   -R us-east-1 -I C04e1utuw -S 447476946884 \
-      #   -k --bg-response None -l debug
-
-      aws-saml \
-        --profile balena-playground \
-        --region us-east-1 \
-        --session-duration 43200 \
-        --idp-arn arn:aws:iam::240706700173:saml-provider/Google \
-        --role-arn arn:aws:iam::240706700173:role/federated-admin
-
-      export AWS_PROFILE="balena-playground"
-
-      aws --profile balena-playground eks --region us-east-1 update-kubeconfig \
-        --name playground-eks --alias playground-eks
-
-      kubectl config use-context playground-eks
-
-      echo "Environment set to balena-playground!"
-    '')
   ];
+
+  programs.zsh.shellAliases.playground-eks = "source ${balena-eks} balena-playground";
+  programs.zsh.shellAliases.production-eks = "source ${balena-eks} balena-production";
+  programs.zsh.shellAliases.staging-eks = "source ${balena-eks} balena-staging";
+
+  programs.bash.shellAliases.playground-eks = "source ${balena-eks} balena-playground";
+  programs.bash.shellAliases.production-eks = "source ${balena-eks} balena-production";
+  programs.bash.shellAliases.staging-eks = "source ${balena-eks} balena-staging";
 }
