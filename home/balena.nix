@@ -15,17 +15,20 @@ let
 
     case $profile in
     balena-playground)
-      context="playground-eks"
+      context="arn:aws:eks:us-east-1:240706700173:cluster/playground-eks-1"
+      name="playground-eks-1"
       idp_arn="arn:aws:iam::240706700173:saml-provider/Google"
       role_arn="arn:aws:iam::240706700173:role/federated-admin"
       ;;
     balena-production)
-      context="production-eks"
+      context="arn:aws:eks:us-east-1:491725000532:cluster/production-eks"
+      name="production-eks"
       idp_arn="arn:aws:iam::491725000532:saml-provider/Google"
       role_arn="arn:aws:iam::491725000532:role/federated-admin"
       ;;
     balena-staging)
-      context="staging-eks"
+      context="arn:aws:eks:us-east-1:567579488761:cluster/staging-eks"
+      name="staging-eks"
       idp_arn="arn:aws:iam::567579488761:saml-provider/Google"
       role_arn="arn:aws:iam::567579488761:role/federated-admin"
       ;;
@@ -43,7 +46,7 @@ let
       --role-arn "$role_arn"
 
     export AWS_PROFILE="$profile"
-    aws eks update-kubeconfig --name "$context"
+    aws eks update-kubeconfig --name "$name"
     kubectl config use-context "$context"
     return
   '';

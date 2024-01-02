@@ -68,6 +68,7 @@
 
     # `brew install --cask`
     casks = [
+      "anytype"
       "balenaetcher"
       "bitwarden"
       "brave-browser"
