@@ -72,6 +72,7 @@
       "balenaetcher"
       "bitwarden"
       "brave-browser"
+      "cloudflare-warp"
       "cryptomator"
       "discord"
       "docker"
