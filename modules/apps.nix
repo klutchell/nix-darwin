@@ -49,6 +49,7 @@
       # WeCom = 1189898970;  # Wechat for Work
       # TecentMetting = 1484048379;
       # QQMusic = 595615424;
+      Bitwarden = 1352778147;
     };
 
     taps = [
@@ -64,13 +65,14 @@
       "aria2" # download tool
       "httpie" # http client
       "diffutils" # diff tool
+      "mas" # Mac App Store CLI
     ];
 
     # `brew install --cask`
     casks = [
       "anytype"
       "balenaetcher"
-      "bitwarden"
+      # "bitwarden"
       "brave-browser"
       "cloudflare-warp"
       "cryptomator"
