@@ -21,15 +21,17 @@
       # Set PATH, MANPATH, etc., for Homebrew.
       eval "$(/opt/homebrew/bin/brew shellenv)"
       # export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
+      # export BALENARC_NO_ANALYTICS=1
     '';
 
-    # initExtra = ''
-    #   # Nix
-    #   if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-    #     . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-    #   fi
-    #   # End Nix
-    # '';
+    initExtra = ''
+      # # Nix
+      # if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      #   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+      # fi
+      # # End Nix
+      export BALENARC_NO_ANALYTICS=1
+    '';
 
     oh-my-zsh = {
       enable = true;
@@ -52,6 +54,7 @@
     localVariables = {
       TZ = "America/Toronto";
       EDITOR = "nano";
+      BALENARC_NO_ANALYTICS = "1";
     };
 
     plugins = [
