@@ -48,7 +48,10 @@
 
     bitwarden-cli # The command line vault (Windows, macOS, & Linux).
 
-    (callPackage ../pkgs/balena-cli.nix {})
+    (callPackage ../pkgs/balena-cli.nix {
+      version = "18.1.0";
+      hash = "sha256-/Kvp81qOYzpTkWECePg+MM7EW4FxqEKqimdVqPlyAsE=";
+    })
   ];
 
   programs = {
