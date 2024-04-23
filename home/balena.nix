@@ -3,9 +3,7 @@
   lib,
   pkgs,
   ...
-}: 
-
-let
+}: let
   balena-eks = pkgs.writeText "balena-eks" ''
     # This is a script which should be sourced
 
@@ -75,6 +73,7 @@ in {
             botocore
             lxml
             requests
+            pip
           ];
         })
       ]))

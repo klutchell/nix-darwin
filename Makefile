@@ -46,6 +46,10 @@ gc:
 	# garbage collect all unused nix store entries
 	sudo nix store gc --debug
 
+# https://github.com/NixOS/nix/issues/7273#issuecomment-1450809740
+optimise:
+	nix store optimise
+
 fmt:
 	# format the nix files in this repo
 	nix fmt
