@@ -22,6 +22,9 @@
       eval "$(/opt/homebrew/bin/brew shellenv)"
       # export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
       # export BALENARC_NO_ANALYTICS=1
+      # Add arkade binary directory to your PATH variable
+      export PATH="$PATH:$HOME/.arkade/bin"
+      export ACTUATED_URL="https://actuated-controller.o6s.io"
     '';
 
     initExtra = ''
