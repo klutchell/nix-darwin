@@ -71,10 +71,12 @@
     # `brew install --cask`
     casks = [
       "anytype"
+      "arc"
       "balenaetcher"
       # "bitwarden"
       "brave-browser"
       "cloudflare-warp"
+      "capacities"
       "cryptomator"
       "discord"
       "docker"
