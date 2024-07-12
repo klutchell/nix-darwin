@@ -68,7 +68,8 @@
     # useful in bash/zsh prompt, not in nushell.
     eza = {
       enable = true;
-      enableAliases = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
       git = true;
       icons = true;
     };
