@@ -70,10 +70,8 @@
 
     # `brew install --cask`
     casks = [
-      "anytype"
       "arc"
       "balenaetcher"
-      # "bitwarden"
       "brave-browser"
       "cloudflare-warp"
       "capacities"
@@ -83,10 +81,8 @@
       "eloston-chromium"
       "firefox"
       "hyper"
-      "logseq"
       "macfuse"
       "obsidian"
-      "openinterminal-lite"
       "openvpn-connect"
       "protonvpn"
       "raspberry-pi-imager"
