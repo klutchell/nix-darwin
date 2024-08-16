@@ -50,10 +50,7 @@
 
     actionlint # GitHub Actions linter
 
-    (callPackage ../pkgs/balena-cli.nix {
-      version = "18.1.0";
-      hash = "sha256-/Kvp81qOYzpTkWECePg+MM7EW4FxqEKqimdVqPlyAsE=";
-    })
+    (callPackage ../pkgs/balena-cli.nix {})
   ];
 
   programs = {
