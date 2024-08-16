@@ -3,12 +3,12 @@
 in {
   # import sub modules
   imports = [
-    homeage.homeManagerModules.homeage
+    # homeage.homeManagerModules.homeage
     ./bash.nix
     ./balena.nix
     ./core.nix
     ./git.nix
-    ./secrets.nix
+    # ./secrets.nix
     ./starship.nix
     ./zsh.nix
   ];
