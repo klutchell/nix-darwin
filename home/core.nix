@@ -38,7 +38,7 @@
     hadolint # Dockerfile linter, validate inline bash scripts
     htop # interactive process viewer
     neofetch # A CLI system information tool written in BASH that supports displaying images.
-    nodejs_20 # A JavaScript runtime built on Chrome's V8 JavaScript engine
+    nodejs_22 # A JavaScript runtime built on Chrome's V8 JavaScript engine
     shellcheck # shell script analysis tool
     shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
     # yadm # Yet Another Dotfiles Manager

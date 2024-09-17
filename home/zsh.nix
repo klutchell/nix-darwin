@@ -51,6 +51,8 @@
       # ll = "ls -l";
       # hms = "home-manager switch";
       balena-staging = "BALENARC_BALENA_URL=balena-staging.com BALENARC_DATA_DIRECTORY=~/.balenaStaging balena";
+      balena-testbot = "BALENARC_BALENA_URL=bm.balena-dev.com BALENARC_DATA_DIRECTORY=~/.balenaTestbot balena";
+
       # gpt-review = "CONTEXT_FILE=${config.home.homeDirectory}/azure.yaml OPENAI_API_KEY=$(cat ${config.home.homeDirectory}/.openai_pat) gpt-review";
     };
 

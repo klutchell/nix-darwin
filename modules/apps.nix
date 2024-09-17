@@ -92,6 +92,7 @@
       "tailscale"
       "visual-studio-code"
       "vlc"
+      "warp"
       "zoom"
       "zulip"
     ];
