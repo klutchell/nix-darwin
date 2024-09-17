@@ -81,6 +81,7 @@
       "eloston-chromium"
       "firefox"
       "hyper"
+      "logi-options+"
       "macfuse"
       "obsidian"
       "openvpn-connect"

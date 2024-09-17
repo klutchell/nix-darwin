@@ -3,6 +3,8 @@
   lib,
   ...
 }: {
+  system.stateVersion = 5;
+
   # enable flakes globally
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
