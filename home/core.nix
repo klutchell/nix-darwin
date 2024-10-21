@@ -50,7 +50,11 @@
 
     actionlint # GitHub Actions linter
 
-    (callPackage ../pkgs/balena-cli.nix {})
+    pre-commit # A framework for managing and maintaining multi-language pre-commit hooks.
+
+    # (callPackage ../pkgs/balena-cli.nix {})
+
+    balena-cli # The official balena CLI tool
   ];
 
   programs = {
