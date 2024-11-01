@@ -30,7 +30,8 @@
     enable = true;
 
     onActivation = {
-      autoUpdate = false;
+      autoUpdate = true;
+      upgrade = true;
       # 'zap': uninstalls all formulae(and related files) not listed here.
       cleanup = "zap";
     };
@@ -70,7 +71,6 @@
 
     # `brew install --cask`
     casks = [
-      "arc"
       "balenaetcher"
       "brave-browser"
       "cloudflare-warp"
@@ -83,7 +83,6 @@
       "hyper"
       "logi-options+"
       "macfuse"
-      "obsidian"
       "openvpn-connect"
       "protonvpn"
       "raspberry-pi-imager"
