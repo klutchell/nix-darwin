@@ -55,6 +55,8 @@
     # (callPackage ../pkgs/balena-cli.nix {})
 
     balena-cli # The official balena CLI tool
+
+    (callPackage ../pkgs/go-github-apps.nix {})
   ];
 
   programs = {
