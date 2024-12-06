@@ -9,6 +9,13 @@
 #
 ############################################################################
 
+build:
+	nix build .#darwinConfigurations.mercury.system \
+		--extra-experimental-features 'nix-command flakes'
+
+switch:
+	./result/sw/bin/darwin-rebuild switch --flake .#mercury
+
 deploy:
 	$(MAKE) darwin
 
