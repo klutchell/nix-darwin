@@ -54,6 +54,7 @@ in {
     # aws-google-auth
     k9s
     kubectl
+    kubeseal
     # saml2aws
     fluxcd
 
