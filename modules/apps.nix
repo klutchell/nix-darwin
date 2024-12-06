@@ -67,6 +67,7 @@
       "httpie" # http client
       "diffutils" # diff tool
       "mas" # Mac App Store CLI
+      "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
     ];
 
     # `brew install --cask`

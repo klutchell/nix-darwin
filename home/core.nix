@@ -46,7 +46,7 @@
     arkade # Kubernetes apps installer
     alejandra # The Uncompromising Nix Code Formatter
 
-    bitwarden-cli # The command line vault (Windows, macOS, & Linux).
+    # bitwarden-cli # The command line vault (Windows, macOS, & Linux).
 
     actionlint # GitHub Actions linter
 
@@ -74,7 +74,7 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
       git = true;
-      icons = true;
+      icons = "auto";
     };
 
     # skim provides a single executable: sk.
