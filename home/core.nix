@@ -114,5 +114,11 @@
       enable = true;
       enableZshIntegration = true;
     };
+
+    go = {
+      enable = true;
+      goPath = "go";
+      goBin = "go/bin";
+    };
   };
 }

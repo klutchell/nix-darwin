@@ -43,8 +43,33 @@
       --idp-arn "$idp_arn" \
       --role-arn "$role_arn"
 
+    # # Disables the use of a keychain in case it's not initialized
+    # # export SAML2AWS_DISABLE_KEYCHAIN=true
+
+    # # export SAML2AWS_OKTA_DISABLE_SESSIONS=true
+    # # export SAML2AWS_BROWSER_TYPE="chromium"
+
+    # # Automatically downloads a compatible browser for authentication
+    # export SAML2AWS_AUTO_BROWSER_DOWNLOAD=true
+
+    # unset SAML2AWS_BROWSER_EXECUTABLE_PATH
+    # # export SAML2AWS_BROWSER_EXECUTABLE_PATH="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+    # export SAML2AWS_BROWSER_AUTOFILL=true
+
+    # # prompt for the base64 SAML response on stderr, and print to stdout
+    # saml2aws configure --profile default --idp-provider Browser \
+    #  --url "https://accounts.google.com/o/saml2/initsso?idpid=C04e1utuw&spid=447476946884&forceauthn=false"
+
     export AWS_PROFILE="$profile"
-    aws eks update-kubeconfig --name "$name"
+    export AWS_REGION="us-east-1"
+
+    # saml2aws login \
+    #   --profile "$AWS_PROFILE" \
+    #   --role "$role_arn" \
+    #   --session-duration=43200 \
+    #   --skip-prompt
+
+    aws eks update-kubeconfig --name "$name" --profile "$AWS_PROFILE"
     kubectl config use-context "$context"
     return
   '';
@@ -55,7 +80,7 @@ in {
     k9s
     kubectl
     kubeseal
-    # saml2aws
+    saml2aws
     fluxcd
 
     (python3.withPackages (p:
