@@ -20,7 +20,12 @@
   # This is the standard format for flake.nix. `inputs` are the dependencies of the flake,
   # Each item in `inputs` will be passed as a parameter to the `outputs` function after being pulled and built.
   inputs = {
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-24.11";
+
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # home-manager, used for managing user configuration
     home-manager = {
@@ -28,12 +33,7 @@
       # The `follows` keyword in inputs is used for inheritance.
       # Here, `inputs.nixpkgs` of home-manager is kept consistent with the `inputs.nixpkgs` of the current flake,
       # to avoid problems caused by different versions of nixpkgs dependencies.
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
-    };
-
-    darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # # https://github.com/jordanisaacs/homeage
@@ -62,13 +62,13 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    darwin,
+    nix-darwin,
     home-manager,
     homeage,
     lix-module,
     ...
   }: {
-    darwinConfigurations.mercury = darwin.lib.darwinSystem {
+    darwinConfigurations.mercury = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin"; # change this to "aarch64-darwin" if you are using Apple Silicon
       modules = [
         ./modules/nix-core.nix
