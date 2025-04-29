@@ -86,6 +86,12 @@
         }
 
         lix-module.nixosModules.default
+
+        {
+          nixpkgs.overlays = [
+            (import ./overlays/nodejs-patch.nix)
+          ];
+        }
       ];
     };
 
