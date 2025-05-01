@@ -52,9 +52,9 @@
 
     pre-commit # A framework for managing and maintaining multi-language pre-commit hooks.
 
-    # (callPackage ../pkgs/balena-cli.nix {})
+    (callPackage ../pkgs/balena-cli/default.nix {})
 
-    balena-cli # The official balena CLI tool
+    # balena-cli # The official balena CLI tool
 
     # (callPackage ../pkgs/go-github-apps.nix {})
   ];

@@ -90,6 +90,7 @@
         {
           nixpkgs.overlays = [
             (import ./overlays/nodejs-patch.nix)
+            # (import ./overlays/balena-cli.nix)
           ];
         }
       ];
