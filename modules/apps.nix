@@ -89,7 +89,7 @@
       # "firefox"
       "google-drive"
       # "hyper"
-      "logi-options-plus"
+      "logi-options+"
       "macfuse"
       "openvpn-connect"
       "protonvpn"
