@@ -57,6 +57,8 @@
     # balena-cli # The official balena CLI tool
 
     # (callPackage ../pkgs/go-github-apps.nix {})
+
+    skopeo # A command line utility for various operations on container images and image repositories
   ];
 
   programs = {
