@@ -121,4 +121,15 @@
       goBin = "go/bin";
     };
   };
+
+  services = {
+    gpg-agent = {
+      enable = true;
+      # Configure gpg-agent to cache keys for 24 hours
+      extraConfig = ''
+        default-cache-ttl 86400
+        max-cache-ttl 86400
+      '';
+    };
+  };
 }
