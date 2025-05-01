@@ -70,6 +70,7 @@
       "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
       "ykman" # YubiKey manager
       "balena-cli" # The official balena CLI tool
+      "rclone" # A command line utility for various operations on cloud storage.
     ];
 
     # `brew install --cask`
@@ -89,6 +90,7 @@
       # "firefox"
       "google-drive"
       # "hyper"
+      "kapitainsky-rclone-browser"
       "logi-options+"
       "macfuse"
       "openvpn-connect"
