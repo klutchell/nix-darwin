@@ -69,6 +69,7 @@
       "mas" # Mac App Store CLI
       "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
       "ykman" # YubiKey manager
+      "balena-cli" # The official balena CLI tool
     ];
 
     # `brew install --cask`
