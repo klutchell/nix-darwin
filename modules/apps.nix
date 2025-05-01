@@ -68,6 +68,7 @@
       "diffutils" # diff tool
       "mas" # Mac App Store CLI
       "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
+      "ykman" # YubiKey manager
     ];
 
     # `brew install --cask`
