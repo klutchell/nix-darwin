@@ -76,6 +76,7 @@
     # `brew install --cask`
     casks = [
       "balenaetcher"
+      "bartender"
       "brave-browser"
       "cloudflare-warp"
       "capacities"
