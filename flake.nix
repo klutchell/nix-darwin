@@ -89,8 +89,13 @@
 
         {
           nixpkgs.overlays = [
-            (import ./overlays/nodejs-patch.nix)
+            # (import ./overlays/nodejs-patch.nix)
             # (import ./overlays/balena-cli.nix)
+            (self: super: {
+              # https://github.com/NixOS/nixpkgs/issues/402079#issuecomment-2846741344
+              nodejs = super.nodejs_22;
+              nodejs-slim = super.nodejs-slim_22;
+            })
           ];
         }
       ];
