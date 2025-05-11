@@ -42,6 +42,7 @@
     shellcheck # shell script analysis tool
     shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
     # yadm # Yet Another Dotfiles Manager
+    bun # Bun is a fast, modern package manager for JavaScript and TypeScript.
 
     arkade # Kubernetes apps installer
     alejandra # The Uncompromising Nix Code Formatter
@@ -49,7 +50,6 @@
     # bitwarden-cli # The command line vault (Windows, macOS, & Linux).
 
     actionlint # GitHub Actions linter
-
     pre-commit # A framework for managing and maintaining multi-language pre-commit hooks.
 
     # (callPackage ../pkgs/balena-cli/default.nix {})
