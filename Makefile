@@ -14,7 +14,7 @@ build:
 		--extra-experimental-features 'nix-command flakes'
 
 switch:
-	./result/sw/bin/darwin-rebuild switch --flake .#mercury
+	sudo ./result/sw/bin/darwin-rebuild switch --flake .#mercury
 
 deploy:
 	$(MAKE) darwin
@@ -23,13 +23,13 @@ darwin:
 	nix build .#darwinConfigurations.mercury.system \
 		--extra-experimental-features 'nix-command flakes'
 
-	./result/sw/bin/darwin-rebuild switch --flake .#mercury
+	sudo ./result/sw/bin/darwin-rebuild switch --flake .#mercury
 
 darwin-debug:
 	nix build .#darwinConfigurations.mercury.system --show-trace --verbose \
 		--extra-experimental-features 'nix-command flakes'
 
-	./result/sw/bin/darwin-rebuild switch --flake .#mercury --show-trace --verbose
+	sudo ./result/sw/bin/darwin-rebuild switch --flake .#mercury --show-trace --verbose
 
 ############################################################################
 #
