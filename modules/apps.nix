@@ -76,7 +76,7 @@
     # `brew install --cask`
     casks = [
       "balenaetcher"
-      "bartender"
+      # "bartender"
       "brave-browser"
       "cloudflare-warp"
       "capacities"
@@ -94,6 +94,7 @@
       "kapitainsky-rclone-browser"
       "logi-options+"
       "macfuse"
+      "magicquit"
       "openvpn-connect"
       "protonvpn"
       # "raspberry-pi-imager"
