@@ -27,6 +27,8 @@
       ".envrc"
       ".direnv*"
       ".devenv*"
+      "devenv.*"
+      ".env"
     ];
 
     # includes = [
