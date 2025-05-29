@@ -29,6 +29,9 @@
       ".devenv*"
       "devenv.*"
       ".env"
+      ".cursor/"
+      ".cursorrules"
+      ".vscode/"
     ];
 
     # includes = [
