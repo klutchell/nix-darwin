@@ -93,6 +93,7 @@
       "google-drive"
       # "hyper"
       "kapitainsky-rclone-browser"
+      "latest"
       "logi-options+"
       "macfuse"
       "magicquit"
