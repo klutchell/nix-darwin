@@ -75,6 +75,7 @@
 
     # `brew install --cask`
     casks = [
+      "appcleaner"
       "balenaetcher"
       # "bartender"
       "brave-browser"
