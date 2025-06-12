@@ -23,7 +23,25 @@
     primaryUser = "kyle";
 
     defaults = {
+      ###############################################################################
+      # General UI/UX                                                               #
+      ###############################################################################
+
       menuExtraClock.Show24Hour = false; # show 24 hour clock
+
+      ###############################################################################
+      # Finder                                                                      #
+      ###############################################################################
+
+      NSGlobalDomain.AppleShowAllExtensions = true;
+      NSGlobalDomain.AppleShowAllFiles = false;
+
+      ###############################################################################
+      # Time Machine                                                                #
+      ###############################################################################
+
+      # Prevent Time Machine from prompting to use new hard drives as backup volume
+      CustomUserPreferences."com.apple.TimeMachine".DoNotOfferNewDisksForBackup = true;
 
       # other macOS's defaults configuration.
       # ......
