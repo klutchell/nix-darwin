@@ -32,6 +32,8 @@
       ".cursor/"
       ".cursorrules"
       ".vscode/"
+      ".claude/"
+      "CLAUDE.md"
     ];
 
     # includes = [
