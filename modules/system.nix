@@ -33,8 +33,29 @@
       # Finder                                                                      #
       ###############################################################################
 
-      NSGlobalDomain.AppleShowAllExtensions = true;
-      NSGlobalDomain.AppleShowAllFiles = false;
+      NSGlobalDomain.AppleShowAllExtensions = true; # show all file extensions
+      NSGlobalDomain.AppleShowAllFiles = false; # hide hidden files
+
+      finder.FXDefaultSearchScope = "SCcf"; # search current folder
+      finder.FXPreferredViewStyle = "Nlsv"; # list view
+      finder.FXRemoveOldTrashItems = true; # remove old trash items
+
+      finder.ShowPathbar = true; # show pathbar
+      finder.ShowStatusBar = true; # show statusbar
+
+      finder.ShowExternalHardDrivesOnDesktop = false;
+      finder.ShowHardDrivesOnDesktop = false;
+      finder.ShowMountedServersOnDesktop = false;
+      finder.ShowRemovableMediaOnDesktop = false;
+
+      ###############################################################################
+      # Dock                                                                        #
+      ###############################################################################
+
+      dock.mineffect = "scale";
+      dock.minimize-to-application = true;
+      dock.show-process-indicators = true;
+      dock.show-recents = false;
 
       ###############################################################################
       # Time Machine                                                                #
