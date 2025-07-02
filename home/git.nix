@@ -34,6 +34,7 @@
       ".vscode/"
       ".claude/"
       "CLAUDE.md"
+      "CLAUDE.local.md"
     ];
 
     # includes = [

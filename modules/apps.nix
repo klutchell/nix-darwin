@@ -97,6 +97,7 @@
       "logi-options+"
       "macfuse"
       "magicquit"
+      "ollama-app"
       "openvpn-connect"
       "protonvpn"
       # "raspberry-pi-imager"
