@@ -83,7 +83,7 @@
       "capacities"
       "chatgpt"
       "claude"
-      # "craft"
+      "craft"
       "cryptomator"
       "cursor"
       "discord"
