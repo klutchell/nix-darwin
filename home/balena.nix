@@ -24,9 +24,15 @@
       idp_arn="arn:aws:iam::491725000532:saml-provider/Google"
       role_arn="arn:aws:iam::491725000532:role/federated-admin"
       ;;
-    balena-staging)
-      context="arn:aws:eks:us-east-1:567579488761:cluster/staging-eks"
-      name="staging-eks"
+    balena-staging-us)
+      context="arn:aws:eks:us-east-1:567579488761:cluster/staging-eks-us-1"
+      name="staging-eks-us-1"
+      idp_arn="arn:aws:iam::567579488761:saml-provider/Google"
+      role_arn="arn:aws:iam::567579488761:role/federated-admin"
+      ;;
+    balena-staging-eu)
+      context="arn:aws:eks:eu-central-1:567579488761:cluster/staging-eks-eu-1"
+      name="staging-eks-eu-1"
       idp_arn="arn:aws:iam::567579488761:saml-provider/Google"
       role_arn="arn:aws:iam::567579488761:role/federated-admin"
       ;;
@@ -107,9 +113,11 @@ in {
 
   programs.zsh.shellAliases.playground-eks = "source ${balena-eks} balena-playground";
   programs.zsh.shellAliases.production-eks = "source ${balena-eks} balena-production";
-  programs.zsh.shellAliases.staging-eks = "source ${balena-eks} balena-staging";
+  programs.zsh.shellAliases.staging-eks = "source ${balena-eks} balena-staging-us";
+  programs.zsh.shellAliases.staging-eks-eu = "source ${balena-eks} balena-staging-eu";
 
   programs.bash.shellAliases.playground-eks = "source ${balena-eks} balena-playground";
   programs.bash.shellAliases.production-eks = "source ${balena-eks} balena-production";
-  programs.bash.shellAliases.staging-eks = "source ${balena-eks} balena-staging";
+  programs.bash.shellAliases.staging-eks = "source ${balena-eks} balena-staging-us";
+  programs.bash.shellAliases.staging-eks-eu = "source ${balena-eks} balena-staging-eu";
 }
