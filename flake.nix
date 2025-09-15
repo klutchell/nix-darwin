@@ -103,5 +103,10 @@
 
     # nix code formmater
     formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
+
+    # Development shells for Balena environments
+    devShells.aarch64-darwin = import ./shells/balena.nix {
+      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+    };
   };
 }
