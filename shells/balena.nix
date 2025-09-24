@@ -51,6 +51,7 @@
         export AWS_REGION="${region}"
         export BALENA_CLUSTER="${cluster}"
         export BALENA_CONTEXT="${context}"
+        export KUBECTL_CONTEXT="${context}"
         export BALENA_ACCOUNT="${account}"
         export BALENA_IDP_ARN="arn:aws:iam::${account}:saml-provider/Google"
         export BALENA_ROLE_ARN="arn:aws:iam::${account}:role/federated-admin"
@@ -69,17 +70,57 @@
             echo "✅ AWS authentication successful"
             echo "🔄 Updating kubeconfig..."
             aws eks update-kubeconfig --name "$BALENA_CLUSTER" --profile "$AWS_PROFILE"
-            kubectl config use-context "$BALENA_CONTEXT"
+            kubectl config use-context "$KUBECTL_CONTEXT"
             echo "✅ Kubernetes context set to ${name}"
             echo ""
             echo "Available commands:"
             echo "  kubectl - Kubernetes CLI"
             echo "  k9s - Kubernetes dashboard"
             echo "  aws - AWS CLI"
+            echo "  flux-get - Flux get"
+            echo "  flux-suspend - Flux suspend"
+            echo "  flux-resume - Flux resume"
+            echo "  flux-reconcile - Flux reconcile"
             echo ""
           else
             echo "❌ AWS authentication failed"
           fi
+        }
+
+        # get suspend resume reconcile
+        function flux-next() {
+          if [ -z "$1" ]; then
+            echo "Available commands:"
+            echo "  get - Flux get"
+            echo "  suspend - Flux suspend"
+            echo "  resume - Flux resume"
+            echo "  reconcile - Flux reconcile"
+            return 2
+          fi
+
+          if [[ $1 =~ get ]]; then
+            flux --context $KUBECTL_CONTEXT get sources git flux-system
+            flux --context $KUBECTL_CONTEXT get kustomizations flux-system
+          else
+            flux --context $KUBECTL_CONTEXT $1 source git flux-system
+            flux --context $KUBECTL_CONTEXT $1 kustomization flux-system
+          fi
+        }
+
+        function flux-get() {
+          flux-next get
+        }
+
+        function flux-suspend() {
+          flux-next suspend
+        }
+
+        function flux-resume() {
+          flux-next resume
+        }
+
+        function flux-reconcile() {
+          flux-next reconcile
         }
 
         echo "Run 'balena-login' to authenticate and configure kubectl"
