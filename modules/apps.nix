@@ -87,7 +87,7 @@
       "cursor"
       "discord"
       "docker-desktop"
-      "eloston-chromium"
+      "ungoogled-chromium"
       # "firefox"
       "google-drive"
       # "hyper"
