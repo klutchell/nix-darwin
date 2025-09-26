@@ -77,7 +77,6 @@
     casks = [
       "appcleaner"
       "balenaetcher"
-      # "bartender"
       "brave-browser"
       "cloudflare-warp"
       "capacities"
@@ -92,25 +91,20 @@
       # "firefox"
       "google-drive"
       # "hyper"
-      "kapitainsky-rclone-browser"
-      "latest"
       "logi-options+"
       "macfuse"
       "magicquit"
       "ollama-app"
       "openvpn-connect"
       "protonvpn"
-      # "raspberry-pi-imager"
       "raycast"
       "signal"
       "spotify"
       "tailscale-app"
       "visual-studio-code"
       "vlc"
-      "warp"
       "yubico-yubikey-manager"
       "zoom"
-      "zulip"
     ];
   };
 }
