@@ -59,12 +59,25 @@
         # Create login function
         balena-login() {
           echo "🔐 Logging into ${name}..."
-          aws-saml \
-            --profile "$AWS_PROFILE" \
-            --region "$AWS_REGION" \
-            --session-duration 43200 \
-            --idp-arn "$BALENA_IDP_ARN" \
-            --role-arn "$BALENA_ROLE_ARN"
+
+          # aws-saml \
+          #   --profile "$AWS_PROFILE" \
+          #   --region "$AWS_REGION" \
+          #   --session-duration 43200 \
+          #   --idp-arn "$BALENA_IDP_ARN" \
+          #   --role-arn "$BALENA_ROLE_ARN"
+
+          # Disables the use of a keychain in case it's not initialized
+          export SAML2AWS_DISABLE_KEYCHAIN=false
+
+          # Automatically downloads a compatible browser for authentication
+          export SAML2AWS_AUTO_BROWSER_DOWNLOAD=false
+
+          saml2aws configure --profile default --idp-provider Browser \
+            --url "https://accounts.google.com/o/saml2/initsso?idpid=C04e1utuw&spid=447476946884&forceauthn=false" \
+            --skip-prompt
+
+          saml2aws login -p "$AWS_PROFILE"
 
           if [ $? -eq 0 ]; then
             echo "✅ AWS authentication successful"
@@ -72,16 +85,6 @@
             aws eks update-kubeconfig --name "$BALENA_CLUSTER" --profile "$AWS_PROFILE"
             kubectl config use-context "$KUBECTL_CONTEXT"
             echo "✅ Kubernetes context set to ${name}"
-            echo ""
-            echo "Available commands:"
-            echo "  kubectl - Kubernetes CLI"
-            echo "  k9s - Kubernetes dashboard"
-            echo "  aws - AWS CLI"
-            echo "  flux-get - Flux get"
-            echo "  flux-suspend - Flux suspend"
-            echo "  flux-resume - Flux resume"
-            echo "  flux-reconcile - Flux reconcile"
-            echo ""
           else
             echo "❌ AWS authentication failed"
           fi
@@ -123,7 +126,18 @@
           flux-next reconcile
         }
 
-        echo "Run 'balena-login' to authenticate and configure kubectl"
+        echo ""
+        echo "Available commands:"
+        echo "  balena-login - Authenticate and update kubeconfig"
+        echo "  kubectl - Kubernetes CLI"
+        echo "  k9s - Kubernetes dashboard"
+        echo "  aws - AWS CLI"
+        echo "  flux - Flux CLI"
+        echo "  flux-get - Flux get"
+        echo "  flux-suspend - Flux suspend"
+        echo "  flux-resume - Flux resume"
+        echo "  flux-reconcile - Flux reconcile"
+        echo ""
       '';
     };
 in {
