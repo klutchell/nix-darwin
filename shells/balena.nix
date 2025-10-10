@@ -7,24 +7,24 @@
     kubeseal
     saml2aws
     fluxcd
-    (python3.withPackages (p:
-      with p; [
-        (buildPythonPackage rec {
-          pname = "awscli-saml";
-          version = "2.0.2";
-          src = fetchPypi {
-            inherit pname version;
-            sha256 = "sha256-rQt985S0pYxKL7Z6vrQr/DhhVs6NUcdzL67N5kXQ1Q8=";
-          };
-          propagatedBuildInputs = [
-            boto3
-            botocore
-            lxml
-            requests
-            pip
-          ];
-        })
-      ]))
+    # (python3.withPackages (p:
+    #   with p; [
+    #     (buildPythonPackage rec {
+    #       pname = "awscli-saml";
+    #       version = "2.0.2";
+    #       src = fetchPypi {
+    #         inherit pname version;
+    #         sha256 = "sha256-rQt985S0pYxKL7Z6vrQr/DhhVs6NUcdzL67N5kXQ1Q8=";
+    #       };
+    #       propagatedBuildInputs = [
+    #         boto3
+    #         botocore
+    #         lxml
+    #         requests
+    #         pip
+    #       ];
+    #     })
+    #   ]))
   ];
 
   # Function to create environment-specific shells

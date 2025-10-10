@@ -60,6 +60,9 @@
     # (callPackage ../pkgs/go-github-apps.nix {})
 
     skopeo # A command line utility for various operations on container images and image repositories
+
+    kubectl # Kubernetes command-line tool
+    k9s # Kubernetes CLI to manage and view your clusters in a terminal UI
   ];
 
   programs = {
