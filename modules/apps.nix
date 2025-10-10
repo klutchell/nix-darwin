@@ -67,7 +67,7 @@
       "httpie" # http client
       "diffutils" # diff tool
       "mas" # Mac App Store CLI
-      "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
+      # "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
       "ykman" # YubiKey manager
       "balena-cli" # The official balena CLI tool
       "rclone" # A command line utility for various operations on cloud storage.
