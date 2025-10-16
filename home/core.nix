@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
   home.packages = with pkgs; [
     nnn # terminal file manager
 
@@ -63,6 +67,8 @@
 
     kubectl # Kubernetes command-line tool
     k9s # Kubernetes CLI to manage and view your clusters in a terminal UI
+
+    uv # An extremely fast Python package and project manager, written in Rust
   ];
 
   programs = {

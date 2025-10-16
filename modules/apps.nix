@@ -58,6 +58,7 @@
       "homebrew/cask-fonts"
       "homebrew/services"
       "homebrew/cask-versions"
+      "steveyegge/beads"
     ];
 
     # `brew install`
@@ -71,6 +72,7 @@
       "ykman" # YubiKey manager
       "balena-cli" # The official balena CLI tool
       "rclone" # A command line utility for various operations on cloud storage.
+      "bd" # A memory upgrade for your coding agent
     ];
 
     # `brew install --cask`
@@ -82,13 +84,11 @@
       "capacities"
       "chatgpt"
       "claude"
+      "claude-code"
       "craft"
       "cryptomator"
-      "cursor"
-      "discord"
       "docker-desktop"
       "ungoogled-chromium"
-      # "firefox"
       "google-drive"
       # "hyper"
       "logi-options+"

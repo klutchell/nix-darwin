@@ -35,6 +35,7 @@
       ".claude/"
       "CLAUDE.md"
       "CLAUDE.local.md"
+      ".beads/"
     ];
 
     # includes = [
