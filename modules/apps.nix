@@ -77,6 +77,9 @@
 
     # `brew install --cask`
     casks = [
+      # # https://nikitabobko.github.io/AeroSpace/guide#installation
+      # "nikitabobko/tap/aerospace"
+      "antigravity"
       "appcleaner"
       "balenaetcher"
       "brave-browser"

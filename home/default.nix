@@ -4,6 +4,7 @@ in {
   # import sub modules
   imports = [
     # homeage.homeManagerModules.homeage
+    # ./aerospace.nix
     ./bash.nix
     ./balena.nix
     ./core.nix
