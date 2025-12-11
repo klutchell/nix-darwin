@@ -14,7 +14,28 @@
 
   # Auto upgrade nix package and the daemon service.
   nix.enable = true;
-  nix.package = pkgs.nix;
+  # nix.package = pkgs.nix;
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      inherit
+        (prev.lixPackageSets.stable)
+        nixpkgs-review
+        nix-eval-jobs
+        nix-fast-build
+        colmena
+        ;
+    })
+    # (import ./overlays/nodejs-patch.nix)
+    # (import ./overlays/balena-cli.nix)
+    # (self: super: {
+    #   # https://github.com/NixOS/nixpkgs/issues/402079#issuecomment-2846741344
+    #   nodejs = super.nodejs_22;
+    #   nodejs-slim = super.nodejs-slim_22;
+    # })
+  ];
+
+  nix.package = pkgs.lixPackageSets.stable.lix;
 
   programs.nix-index.enable = true;
 

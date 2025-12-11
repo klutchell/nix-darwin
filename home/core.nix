@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
@@ -129,8 +133,22 @@
 
     go = {
       enable = true;
-      goPath = "go";
-      goBin = "go/bin";
+      env = {
+        GOPATH = [
+          "${config.home.homeDirectory}/go"
+        ];
+        GOBIN = "${config.home.homeDirectory}/go/bin";
+      };
+    };
+
+    # https://nix-community.github.io/home-manager/options.html#opt-programs.git.delta.enable
+    # https://github.com/dandavison/delta
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+      # options = {
+      #   features = "side-by-side";
+      # };
     };
   };
 

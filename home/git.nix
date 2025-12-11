@@ -15,10 +15,7 @@
   programs.git = {
     enable = true;
     # lfs.enable = true;
-    package = pkgs.gitAndTools.gitFull;
-
-    userName = "Kyle Harding";
-    userEmail = "kyle@balena.io";
+    package = pkgs.gitFull;
 
     ignores = [
       ".DS_Store"
@@ -46,7 +43,32 @@
     #   }
     # ];
 
-    extraConfig = {
+    signing = {
+      key = "0x38E0DD4F8A698F6A";
+      signByDefault = true;
+    };
+
+    settings = {
+      user = {
+        name = "Kyle Harding";
+        email = "kyle@balena.io";
+      };
+      alias = {
+        # common aliases
+        br = "branch";
+        co = "checkout";
+        st = "status";
+        ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";
+        ll = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat";
+        cm = "commit -m";
+        ca = "commit -am";
+        dc = "diff --cached";
+        amend = "commit --amend '-S'";
+
+        # aliases for submodule
+        update = "submodule update --init --recursive";
+        foreach = "submodule foreach";
+      };
       core = {
         editor = "nano";
       };
@@ -72,37 +94,6 @@
         smtpserverport = 587;
         smtpuser = "kyle@balena.io";
       };
-    };
-
-    signing = {
-      key = "0x38E0DD4F8A698F6A";
-      signByDefault = true;
-    };
-
-    # https://nix-community.github.io/home-manager/options.html#opt-programs.git.delta.enable
-    # https://github.com/dandavison/delta
-    delta = {
-      enable = true;
-      # options = {
-      #   features = "side-by-side";
-      # };
-    };
-
-    aliases = {
-      # common aliases
-      br = "branch";
-      co = "checkout";
-      st = "status";
-      ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";
-      ll = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat";
-      cm = "commit -m";
-      ca = "commit -am";
-      dc = "diff --cached";
-      amend = "commit --amend '-S'";
-
-      # aliases for submodule
-      update = "submodule update --init --recursive";
-      foreach = "submodule foreach";
     };
   };
 }
