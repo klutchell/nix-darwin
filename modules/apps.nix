@@ -100,6 +100,7 @@
       "ungoogled-chromium"
       "google-drive"
       # "hyper"
+      "iina"
       "logi-options+"
       "macfuse"
       "magicquit"
