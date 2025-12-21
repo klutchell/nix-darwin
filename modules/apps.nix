@@ -51,6 +51,13 @@
       # TecentMetting = 1484048379;
       # QQMusic = 595615424;
       Bitwarden = 1352778147;
+      Dropover = 1355679052;
+      Hyperspace = 6739505345;
+      Parachute = 6748614170;
+      Perplexity = 6714467650;
+      SaveToRaindrop = 1549370672;
+      SaveToReader = 1640236961;
+      SimpleLoginForSafari = 6475835429;
     };
 
     taps = [
@@ -58,7 +65,6 @@
       "homebrew/cask-fonts"
       "homebrew/services"
       "homebrew/cask-versions"
-      "steveyegge/beads"
     ];
 
     # `brew install`
@@ -99,8 +105,10 @@
       "magicquit"
       "ollama-app"
       "openvpn-connect"
+      "pronotes"
       "protonvpn"
       "raycast"
+      "setapp"
       "signal"
       "spotify"
       "tailscale-app"
