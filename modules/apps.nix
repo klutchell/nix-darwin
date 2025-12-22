@@ -58,6 +58,7 @@
       SaveToRaindrop = 1549370672;
       SaveToReader = 1640236961;
       SimpleLoginForSafari = 6475835429;
+      FolderPreview = 6698876601;
     };
 
     taps = [
@@ -101,9 +102,11 @@
       "google-drive"
       # "hyper"
       "iina"
+      "jordanbaird-ice"
       "logi-options+"
       "macfuse"
       "magicquit"
+      "mediamate"
       "ollama-app"
       "openvpn-connect"
       "pronotes"
