@@ -86,6 +86,7 @@
     casks = [
       # # https://nikitabobko.github.io/AeroSpace/guide#installation
       # "nikitabobko/tap/aerospace"
+      "alcove"
       "antigravity"
       "appcleaner"
       "balenaetcher"
@@ -106,7 +107,6 @@
       "logi-options+"
       "macfuse"
       "magicquit"
-      "mediamate"
       "ollama-app"
       "openvpn-connect"
       "pronotes"
