@@ -100,6 +100,7 @@
       "cryptomator"
       "docker-desktop"
       "ungoogled-chromium"
+      "ghostty"
       "google-drive"
       # "hyper"
       "iina"
