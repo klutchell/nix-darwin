@@ -43,6 +43,10 @@
     # productivity
     glow # markdown previewer in terminal
 
+    podman # Program for managing pods, containers and container images
+    podman-compose # Implementation of docker-compose with podman backend
+    buildah # Tool which facilitates building OCI images
+
     git-crypt # transparent file encryption in git
     hadolint # Dockerfile linter, validate inline bash scripts
     htop # interactive process viewer
