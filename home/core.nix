@@ -322,6 +322,8 @@
     macos-option-as-alt = true
   '';
 
+  home.file.".claude/CLAUDE.md".source = ./claude-code.md;
+
   home.file.".config/zellij/layouts/dev.kdl".text = ''
     layout {
         default_tab_template {
