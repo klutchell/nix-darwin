@@ -17,10 +17,8 @@
   #
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
-    neovim
     git
   ];
-  environment.variables.EDITOR = "nano";
 
   # To make this work, homebrew need to be installed manually, see https://brew.sh
   #

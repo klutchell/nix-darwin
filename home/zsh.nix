@@ -34,6 +34,33 @@
       # fi
       # # End Nix
       export BALENARC_NO_ANALYTICS=1
+
+      # Open or attach to a zellij dev session for a project
+      zdev() {
+        local dir="''${1:-.}"
+        dir="$(cd "$dir" 2>/dev/null && pwd)" || { echo "zdev: no such directory: $1"; return 1; }
+        local name="''${2:-''${dir##*/}}"
+
+        if [ -n "$ZELLIJ" ]; then
+          echo "Already in zellij. Use Ctrl+o, w to switch sessions."
+          return 1
+        fi
+
+        if zellij list-sessions 2>/dev/null | grep -q "^$name "; then
+          zellij attach "$name" --force-run-commands
+        else
+          zellij -s "$name" --layout dev --cwd "$dir"
+        fi
+      }
+
+      # List zellij sessions
+      zls() { zellij list-sessions; }
+
+      # Kill a zellij session
+      zkill() {
+        local name="''${1:?Usage: zkill <session-name>}"
+        zellij kill-session "$name"
+      }
     '';
 
     oh-my-zsh = {
@@ -57,7 +84,7 @@
 
     localVariables = {
       TZ = "America/Toronto";
-      EDITOR = "nano";
+      EDITOR = "nvim";
       BALENARC_NO_ANALYTICS = "1";
     };
 

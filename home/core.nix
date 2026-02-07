@@ -8,8 +8,6 @@
   ];
 
   home.packages = with pkgs; [
-    nnn # terminal file manager
-
     # archives
     zip
     xz
@@ -152,6 +150,132 @@
       #   features = "side-by-side";
       # };
     };
+
+    # Terminal Emulator
+    # https://github.com/ghostty-terminal/ghostty
+    # NOTE: ghostty nixpkg is Linux-only; installed via homebrew cask instead
+    # ghostty = {
+    #   enable = true;
+    #   enableBashIntegration = true;
+    #   enableZshIntegration = true;
+    #   settings = {
+    #     macos-option-as-alt = true;
+    #   };
+    # };
+
+    # Terminal UI for git
+    # https://github.com/jesseduffield/lazygit
+    lazygit = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+
+    # Terminal File Manager
+    # https://github.com/sxyazi/yazi
+    yazi = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+
+    # Terminal Workspace with Batteries Included
+    # https://zellij.dev/
+    zellij = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      # layouts = {
+      #   dev = {
+      #     layout = {
+      #       _children = [
+      #         {
+      #           default_tab_template = {
+      #             _children = [
+      #               {
+      #                 pane = {
+      #                   size = 1;
+      #                   borderless = true;
+      #                   plugin = {
+      #                     location = "zellij:tab-bar";
+      #                   };
+      #                 };
+      #               }
+      #               {"children" = {};}
+      #               {
+      #                 pane = {
+      #                   size = 2;
+      #                   borderless = true;
+      #                   plugin = {
+      #                     location = "zellij:status-bar";
+      #                   };
+      #                 };
+      #               }
+      #             ];
+      #           };
+      #         }
+      #         {
+      #           tab = {
+      #             _props = {
+      #               name = "Project";
+      #               focus = true;
+      #             };
+      #             _children = [
+      #               {
+      #                 pane = {
+      #                   command = "nvim";
+      #                 };
+      #               }
+      #             ];
+      #           };
+      #         }
+      #         {
+      #           tab = {
+      #             _props = {
+      #               name = "Git";
+      #             };
+      #             _children = [
+      #               {
+      #                 pane = {
+      #                   command = "lazygit";
+      #                 };
+      #               }
+      #             ];
+      #           };
+      #         }
+      #         {
+      #           tab = {
+      #             _props = {
+      #               name = "Files";
+      #             };
+      #             _children = [
+      #               {
+      #                 pane = {
+      #                   command = "yazi";
+      #                 };
+      #               }
+      #             ];
+      #           };
+      #         }
+      #         {
+      #           tab = {
+      #             _props = {
+      #               name = "Shell";
+      #             };
+      #             _children = [
+      #               {
+      #                 pane = {
+      #                   command = "zsh";
+      #                 };
+      #               }
+      #             ];
+      #           };
+      #         }
+      #       ];
+      #     };
+      #   };
+      # };
+    };
   };
 
   services = {
@@ -164,4 +288,44 @@
       '';
     };
   };
+
+  home.file.".config/ghostty/config".text = ''
+    macos-option-as-alt = true
+  '';
+
+  home.file.".config/zellij/layouts/dev.kdl".text = ''
+    layout {
+        default_tab_template {
+            pane size=1 borderless=true {
+                plugin location="zellij:tab-bar"
+            }
+            children
+            pane size=2 borderless=true {
+                plugin location="zellij:status-bar"
+            }
+        }
+
+        tab focus=true {
+            pane split_direction="vertical" {
+                pane size="50%" {
+                    command "claude"
+                    name "Claude Code"
+                }
+                pane size="50%" {
+                    command "lazygit"
+                    name "lazygit"
+                }
+            }
+            pane split_direction="vertical" size="50%" {
+                pane size="50%" {
+                    command "yazi"
+                    name "yazi"
+                }
+                pane size="50%" {
+                    name "terminal"
+                }
+            }
+        }
+    }
+  '';
 }
