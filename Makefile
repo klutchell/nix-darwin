@@ -61,6 +61,9 @@ fmt:
 	# format the nix files in this repo
 	nix fmt
 
-.PHONY: clean  
-clean:  
+update-balena:
+	bash scripts/update-balena-cli.sh
+
+.PHONY: clean
+clean:
 	rm -rf result
