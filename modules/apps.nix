@@ -52,7 +52,7 @@
       Dropover = 1355679052;
       Hyperspace = 6739505345;
       Parachute = 6748614170;
-      Perplexity = 6714467650;
+      # Perplexity = 6714467650;
       SaveToRaindrop = 1549370672;
       SaveToReader = 1640236961;
       SimpleLoginForSafari = 6475835429;
@@ -76,7 +76,7 @@
       # "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
       "ykman" # YubiKey manager
       "rclone" # A command line utility for various operations on cloud storage.
-      "bd" # A memory upgrade for your coding agent
+      # "bd" # A memory upgrade for your coding agent
     ];
 
     # `brew install --cask`
@@ -90,7 +90,7 @@
       "brave-browser"
       "cloudflare-warp"
       "capacities"
-      "chatgpt"
+      # "chatgpt"
       "claude"
       "claude-code"
       "craft"
@@ -114,7 +114,7 @@
       "spotify"
       "tailscale-app"
       "visual-studio-code"
-      "vlc"
+      # "vlc"
       "yubico-yubikey-manager"
       "zoom"
     ];
