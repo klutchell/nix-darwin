@@ -71,7 +71,7 @@
           export SAML2AWS_DISABLE_KEYCHAIN=false
 
           # Automatically downloads a compatible browser for authentication
-          export SAML2AWS_AUTO_BROWSER_DOWNLOAD=false
+          export SAML2AWS_AUTO_BROWSER_DOWNLOAD=true
 
           saml2aws configure --profile default --idp-provider Browser \
             --url "https://accounts.google.com/o/saml2/initsso?idpid=C04e1utuw&spid=447476946884&forceauthn=false" \
