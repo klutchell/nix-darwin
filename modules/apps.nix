@@ -58,7 +58,7 @@
       SaveToRaindrop = 1549370672;
       SaveToReader = 1640236961;
       SimpleLoginForSafari = 6475835429;
-      FolderPreview = 6698876601;
+      # FolderPreview = 6698876601;
     };
 
     taps = [
@@ -102,10 +102,9 @@
       "ungoogled-chromium"
       "ghostty"
       "google-drive"
-      # "hyper"
       "iina"
       "jordanbaird-ice"
-      "logi-options+"
+      # "logi-options+"
       "macfuse"
       "magicquit"
       "ollama-app"
