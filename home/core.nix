@@ -174,6 +174,15 @@
       enableZshIntegration = true;
       settings = {
         git.commit.signOff = true;
+        customCommands = [
+          {
+            key = "<c-a>";
+            context = "files";
+            description = "AI commit message";
+            command = ''git commit -s -F <(claude -p "Generate a commit message for the staged changes. Use conventional commit style. Output ONLY the raw commit message, nothing else — no markdown fences, no explanation.")'';
+            output = "log";
+          }
+        ];
       };
     };
 
