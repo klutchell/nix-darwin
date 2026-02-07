@@ -35,31 +35,35 @@
       # # End Nix
       export BALENARC_NO_ANALYTICS=1
 
-      # Open or attach to a zellij dev session for a project
+      # Open or create a zellij dev session via zsm
       zdev() {
-        local dir="''${1:-.}"
-        dir="$(cd "$dir" 2>/dev/null && pwd)" || { echo "zdev: no such directory: $1"; return 1; }
-        local name="''${2:-''${dir##*/}}"
-
         if [ -n "$ZELLIJ" ]; then
-          echo "Already in zellij. Use Ctrl+o, w to switch sessions."
-          return 1
-        fi
-
-        if zellij list-sessions 2>/dev/null | grep -q "^$name "; then
-          zellij attach "$name" --force-run-commands
+          zellij action launch-or-focus-plugin "zsm" --floating
         else
-          zellij -s "$name" --layout dev --cwd "$dir"
+          if [ -n "$1" ]; then
+            local dir="''${1:-.}"
+            dir="$(cd "$dir" 2>/dev/null && pwd)" || { echo "zdev: no such directory: $1"; return 1; }
+            local name="''${2:-''${dir##*/}}"
+            zellij attach "$name" -c options --default-cwd "$dir" --default-layout dev
+          else
+            zellij --layout dev
+          fi
         fi
       }
 
-      # List zellij sessions
       zls() { zellij list-sessions; }
 
-      # Kill a zellij session
       zkill() {
-        local name="''${1:?Usage: zkill <session-name>}"
-        zellij kill-session "$name"
+        if [ -n "$1" ]; then
+          zellij kill-session "$1"
+        else
+          local pick
+          pick=$(zellij list-sessions 2>/dev/null \
+            | sed 's/\x1b\[[0-9;]*m//g' \
+            | cut -d' ' -f1 \
+            | fzf --prompt="kill session> " --height=~40%)
+          [ -n "$pick" ] && zellij kill-session "$pick"
+        fi
       }
     '';
 

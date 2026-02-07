@@ -16,6 +16,7 @@
 
     # utils
     coreutils # GNU core utilities
+    fd # simple, fast alternative to find
     ripgrep # recursively searches directories for a regex pattern
     jq # A lightweight and flexible command-line JSON processor
     yq-go # yaml processer https://github.com/mikefarah/yq
@@ -184,12 +185,21 @@
       enableZshIntegration = true;
     };
 
+    # Smarter cd — tracks frecency for zoxide-powered tools like zsm
+    # https://github.com/ajeetdsouza/zoxide
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+
     # Terminal Workspace with Batteries Included
     # https://zellij.dev/
     zellij = {
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      extraConfig = builtins.readFile ./zellij.kdl;
       # layouts = {
       #   dev = {
       #     layout = {
@@ -292,6 +302,11 @@
         max-cache-ttl 86400
       '';
     };
+  };
+
+  home.file.".config/zellij/plugins/zsm.wasm".source = pkgs.fetchurl {
+    url = "https://github.com/liam-mackie/zsm/releases/download/v0.4.1/zsm.wasm";
+    sha256 = "026bpn09r6rsjsvrd21l0l4jzsq0cggbn9dgvammjh87q7s9yl7r";
   };
 
   home.file.".config/ghostty/config".text = ''
