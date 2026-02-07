@@ -77,6 +77,7 @@
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = inputs;
           home-manager.users.kyle = import ./home;
+          home-manager.backupFileExtension = "home-manager-backup";
         }
 
         {
