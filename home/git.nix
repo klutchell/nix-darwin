@@ -34,6 +34,8 @@
       "CLAUDE.local.md"
       ".beads/"
       ".quint/"
+      ".claude-tasks/"
+      ".mcp/"
     ];
 
     # includes = [
