@@ -81,6 +81,8 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
+      withNodeJs = true;
+      withPython3 = true;
     };
 
     # A modern replacement for ‘ls’
@@ -169,6 +171,9 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      settings = {
+        git.commit.signOff = true;
+      };
     };
 
     # Terminal File Manager
