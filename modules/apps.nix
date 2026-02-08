@@ -106,6 +106,7 @@
       "magicquit"
       "ollama-app"
       "openvpn-connect"
+      "orbstack"
       "pronotes"
       "protonvpn"
       "raycast"
