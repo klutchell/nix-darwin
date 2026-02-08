@@ -83,7 +83,7 @@
     casks = [
       # # https://nikitabobko.github.io/AeroSpace/guide#installation
       # "nikitabobko/tap/aerospace"
-      "alcove"
+      # "alcove"
       "antigravity"
       "appcleaner"
       "balenaetcher"
