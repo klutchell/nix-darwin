@@ -99,6 +99,7 @@
       "ungoogled-chromium"
       "ghostty"
       "google-drive"
+      "hazel"
       "iina"
       "jordanbaird-ice"
       # "logi-options+"
