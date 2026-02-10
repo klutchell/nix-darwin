@@ -47,6 +47,7 @@
     buildah # Tool which facilitates building OCI images
 
     git-crypt # transparent file encryption in git
+    git-secret # store private data in git using GPG encryption
     hadolint # Dockerfile linter, validate inline bash scripts
     htop # interactive process viewer
     neofetch # A CLI system information tool written in BASH that supports displaying images.
