@@ -10,6 +10,7 @@ in {
     ./core.nix
     ./git.nix
     # ./secrets.nix
+    ./ssh.nix
     ./starship.nix
     ./zsh.nix
   ];

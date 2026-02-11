@@ -326,6 +326,13 @@
 
   home.file.".claude/CLAUDE.md".source = ./claude-code.md;
 
+  home.file.".prettierrc".text = ''
+    {
+      "proseWrap": "always",
+      "printWidth": 80
+    }
+  '';
+
   home.file.".config/zellij/layouts/dev.kdl".text = ''
     layout {
         default_tab_template {
