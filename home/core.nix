@@ -326,6 +326,12 @@
 
   home.file.".claude/CLAUDE.md".source = ./claude-code.md;
 
+  home.file.".config/worktrunk/config.toml".text = ''
+    # Worktree path: sibling directory with @ separator
+    # e.g., ~/src/org/repo@feature-branch
+    worktree-path = "{{ repo_path }}/../{{ repo }}@{{ branch | sanitize }}"
+  '';
+
   home.file.".prettierrc".text = ''
     {
       "proseWrap": "always",

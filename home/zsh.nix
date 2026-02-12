@@ -34,6 +34,9 @@
       # fi
       # # End Nix
       export BALENARC_NO_ANALYTICS=1
+
+      # worktrunk (wt) shell integration — enables directory switching on wt switch
+      eval "$(wt config shell init zsh)"
     '';
 
     oh-my-zsh = {
