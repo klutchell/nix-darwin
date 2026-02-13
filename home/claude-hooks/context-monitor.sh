@@ -12,7 +12,7 @@ fi
 throttle_file="/tmp/claude-context-monitor-$(echo "$transcript" | md5 -q 2>/dev/null || md5sum <<<"$transcript" | cut -d' ' -f1)"
 
 if [[ -f "$throttle_file" ]]; then
-  last_check=$(stat -f %m "$throttle_file" 2>/dev/null || stat -c %Y "$throttle_file" 2>/dev/null || echo 0)
+  last_check=$(stat -c %Y "$throttle_file" 2>/dev/null || stat -f %m "$throttle_file" 2>/dev/null || echo 0)
   now=$(date +%s)
   if (( now - last_check < 30 )); then
     exit 0
@@ -21,7 +21,7 @@ fi
 touch "$throttle_file"
 
 # Get transcript size in KB
-size_kb=$(( $(stat -f %z "$transcript" 2>/dev/null || stat -c %s "$transcript" 2>/dev/null || echo 0) / 1024 ))
+size_kb=$(( $(stat -c %s "$transcript" 2>/dev/null || stat -f '%z' "$transcript" 2>/dev/null || echo 0) / 1024 ))
 
 if (( size_kb >= 760 )); then
   echo "CONTEXT CRITICAL (~95%) — Stop current work and start a new session. Save any important context to memory first." >&2
