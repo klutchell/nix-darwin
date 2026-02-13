@@ -210,6 +210,8 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      attachExistingSession = true;
+      exitShellOnExit = true;
       extraConfig = builtins.readFile ./zellij.kdl;
       # layouts = {
       #   dev = {
