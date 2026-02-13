@@ -210,7 +210,7 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      attachExistingSession = true;
+      attachExistingSession = false;
       exitShellOnExit = true;
       extraConfig = builtins.readFile ./zellij.kdl;
       # layouts = {
@@ -348,6 +348,18 @@
     {
       "proseWrap": "always",
       "printWidth": 80
+    }
+  '';
+
+  home.file.".config/zellij/layouts/session-picker.kdl".text = ''
+    layout {
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zsm.wasm" {
+                default_layout "dev"
+                show_resurrectable_sessions true
+                base_paths "/Users/kyle"
+            }
+        }
     }
   '';
 
