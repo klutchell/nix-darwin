@@ -1,10 +1,17 @@
-<!-- This file is nix-managed (read-only). Write dynamic learnings
-     to ~/.claude/rules/learnings.md instead. -->
+<!-- This file is nix-managed (read-only). Dynamic learnings go to
+     ~/.claude/rules/learnings.md, profile updates to ~/.claude/rules/profile.md -->
 
-## Learnings
+## Learning
 
-- **After corrections**: write lesson to `CLAUDE.local.md` (project) or `~/.claude/rules/learnings.md` (global)
+After corrections, rejected approaches, or repeated patterns, write generalized observations:
+- **About Kyle**: `~/.claude/rules/profile.md` — preferences, decision patterns, communication style
+- **About work**: `~/.claude/rules/learnings.md` — cross-project lessons, tool gotchas
+- **About this project**: `CLAUDE.local.md` in project root — repo-specific conventions, gotchas, patterns
+- Notify: `> Noted: [observation]` — one line, no action needed from user
+- Generalize: "prefers X over Y" not "said X on date"
 - Check existing entries first — no duplicates
+- When `learnings.md` exceeds ~200 words, consolidate stable entries (observed 2+ times) into `profile.md`
+- Keep `profile.md` under ~300 words by merging related observations
 
 ## Start with WHY
 
