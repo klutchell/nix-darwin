@@ -193,7 +193,10 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      settings.manager.ratio = [ 1 1 6 ];
+      settings.manager = {
+        ratio = [ 1 2 5 ];
+        show_hidden = true;
+      };
     };
 
     # Smarter cd — tracks frecency for zoxide-powered tools like zsm
