@@ -211,10 +211,8 @@
     # https://zellij.dev/
     zellij = {
       enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      attachExistingSession = false;
-      exitShellOnExit = true;
+      enableBashIntegration = false;
+      enableZshIntegration = false;
       extraConfig = builtins.readFile ./zellij.kdl;
       # layouts = {
       #   dev = {

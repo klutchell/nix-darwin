@@ -53,6 +53,7 @@
     shellAliases = {
       # ll = "ls -l";
       # hms = "home-manager switch";
+      zj = "zellij --layout session-picker";
       balena-staging = "BALENARC_BALENA_URL=balena-staging.com BALENARC_DATA_DIRECTORY=~/.balenaStaging balena";
       balena-testbot = "BALENARC_BALENA_URL=bm.balena-dev.com BALENARC_DATA_DIRECTORY=~/.balenaTestbot balena";
       balean = "balena";
