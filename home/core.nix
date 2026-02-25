@@ -327,7 +327,6 @@
     macos-option-as-alt = true
   '';
 
-  home.file.".claude/CLAUDE.md".source = ./claude-code.md;
 
   home.file.".claude/hooks/github-guard.sh" = {
     source = ./claude-hooks/github-guard.sh;
