@@ -325,6 +325,7 @@
 
   home.file.".config/ghostty/config".text = ''
     macos-option-as-alt = true
+    copy-on-select = true
   '';
 
 
