@@ -69,6 +69,21 @@
     };
   };
 
+  # Set environment variables for GUI apps (launchd user session)
+  # Ensures nix-installed binaries are available to apps like Claude Desktop
+  launchd.user.envVariables = {
+    PATH = builtins.concatStringsSep ":" [
+      "/etc/profiles/per-user/kyle/bin"
+      "/run/current-system/sw/bin"
+      "/nix/var/nix/profiles/default/bin"
+      "/usr/local/bin"
+      "/usr/bin"
+      "/bin"
+      "/usr/sbin"
+      "/sbin"
+    ];
+  };
+
   # Add ability to used TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
 
