@@ -55,7 +55,7 @@
       # Perplexity = 6714467650;
       SaveToRaindrop = 1549370672;
       SaveToReader = 1640236961;
-      SimpleLoginForSafari = 6475835429;
+      # SimpleLoginForSafari = 6475835429;
       # FolderPreview = 6698876601;
     };
 
