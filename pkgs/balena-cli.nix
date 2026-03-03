@@ -5,6 +5,8 @@ pkgs.stdenv.mkDerivation rec {
   pname = "balena-cli";
   version = "24.0.3";
 
+  dontStrip = true;
+
   src = pkgs.fetchzip {
     url = "https://github.com/balena-io/balena-cli/releases/download/v${version}/balena-cli-v${version}-macOS-arm64-standalone.tar.gz";
     sha256 = "sha256-P142oTnLuFt2ca0v6O+qzHRLvJfIRDspLpGfnDSwdbg=";
@@ -14,7 +16,13 @@ pkgs.stdenv.mkDerivation rec {
     mkdir -p $out/libexec/balena-cli
     mkdir -p $out/bin
     cp -r * $out/libexec/balena-cli
-    ln -s $out/libexec/balena-cli/bin/balena $out/bin/balena
+    cat > $out/bin/balena <<EOF
+    #!/usr/bin/env bash
+    export BALENA_REDIRECTED=1
+    export BALENARC_NO_ANALYTICS=1
+    exec "$out/libexec/balena-cli/bin/balena" "\$@"
+    EOF
+    chmod +x $out/bin/balena
   '';
 
   meta = with pkgs.lib; {

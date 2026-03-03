@@ -21,7 +21,6 @@
       # Set PATH, MANPATH, etc., for Homebrew.
       eval "$(/opt/homebrew/bin/brew shellenv)"
       # export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
-      # export BALENARC_NO_ANALYTICS=1
       # Add arkade binary directory to your PATH variable
       export PATH="$PATH:$HOME/.arkade/bin"
       export ACTUATED_URL="https://actuated-controller.o6s.io"
@@ -33,8 +32,6 @@
       #   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
       # fi
       # # End Nix
-      export BALENARC_NO_ANALYTICS=1
-
       # worktrunk (wt) shell integration — enables directory switching on wt switch
       eval "$(wt config shell init zsh)"
     '';
@@ -62,7 +59,6 @@
     localVariables = {
       TZ = "America/Toronto";
       EDITOR = "nvim";
-      BALENARC_NO_ANALYTICS = "1";
     };
 
     plugins = [
