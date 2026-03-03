@@ -3,11 +3,11 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.stdenv.mkDerivation rec {
   pname = "balena-cli";
-  version = "24.0.0";
+  version = "24.0.3";
 
   src = pkgs.fetchzip {
     url = "https://github.com/balena-io/balena-cli/releases/download/v${version}/balena-cli-v${version}-macOS-arm64-standalone.tar.gz";
-    sha256 = "sha256-cA5e5ofRlNVmKW73SE2/BKOfKU520VQ7s2MGKztE4OY=";
+    sha256 = "sha256-P142oTnLuFt2ca0v6O+qzHRLvJfIRDspLpGfnDSwdbg=";
   };
 
   installPhase = ''
