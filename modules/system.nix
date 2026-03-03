@@ -18,6 +18,9 @@
 
     activationScripts.postActivation.text = ''
       sudo -u kyle /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+
+      # Point Docker socket to OrbStack
+      ln -sf /Users/kyle/.orbstack/run/docker.sock /var/run/docker.sock
     '';
 
     primaryUser = "kyle";

@@ -56,6 +56,7 @@
     shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
     # yadm # Yet Another Dotfiles Manager
     bun # Bun is a fast, modern package manager for JavaScript and TypeScript.
+    docker-client # Docker CLI (without daemon)
 
     arkade # Kubernetes apps installer
     alejandra # The Uncompromising Nix Code Formatter
@@ -194,7 +195,7 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
       settings.manager = {
-        ratio = [ 1 2 5 ];
+        ratio = [1 2 5];
         show_hidden = true;
       };
     };
@@ -327,7 +328,6 @@
     macos-option-as-alt = true
     copy-on-select = true
   '';
-
 
   home.file.".claude/hooks/github-guard.sh" = {
     source = ./claude-hooks/github-guard.sh;
