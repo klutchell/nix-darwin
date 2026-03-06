@@ -326,7 +326,7 @@
 
   home.file.".config/ghostty/config".text = ''
     macos-option-as-alt = true
-    copy-on-select = true
+    copy-on-select = clipboard
   '';
 
   home.file.".claude/hooks/github-guard.sh" = {
