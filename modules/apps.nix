@@ -75,7 +75,6 @@
       "mas" # Mac App Store CLI
       # "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
       "ykman" # YubiKey manager
-      "rclone" # A command line utility for various operations on cloud storage.
       "worktrunk" # Git worktree management CLI
       # "bd" # A memory upgrade for your coding agent
     ];
