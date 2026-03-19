@@ -9,76 +9,70 @@
 
   home.packages = with pkgs; [
     # archives
-    zip
-    xz
-    unzip
     p7zip
-
-    # utils
-    coreutils # GNU core utilities
-    fd # simple, fast alternative to find
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    yq-go # yaml processer https://github.com/mikefarah/yq
-    gnugrep # GNU grep, egrep and fgrep
-
-    aria2 # A lightweight multi-protocol & multi-source command-line download utility
-    socat # replacement of openbsd-netcat
-    nmap # A utility for network discovery and security auditing
-    tio # simple TTY terminal I/O application
-
-    # misc
-    cowsay
-    file
-    which
-    tree
-    gnused
-    gnutar
-    gawk
+    unzip
+    xz
+    zip
     zstd
-    # caddy
-    gnupg
 
-    # productivity
-    glow # markdown previewer in terminal
-
+    # containers & kubernetes
+    arkade # Kubernetes apps installer
+    buildah # Tool which facilitates building OCI images
+    docker-client # Docker CLI (without daemon)
+    flyctl # Fly.io CLI
+    k9s # Kubernetes CLI to manage and view your clusters in a terminal UI
+    kubectl # Kubernetes command-line tool
     podman # Program for managing pods, containers and container images
     podman-compose # Implementation of docker-compose with podman backend
-    buildah # Tool which facilitates building OCI images
-
-    git-crypt # transparent file encryption in git
-    git-secret # store private data in git using GPG encryption
-    hadolint # Dockerfile linter, validate inline bash scripts
-    htop # interactive process viewer
-    neofetch # A CLI system information tool written in BASH that supports displaying images.
-    nodejs_24 # A JavaScript runtime built on Chrome's V8 JavaScript engine
-    shellcheck # shell script analysis tool
-    shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
-    # yadm # Yet Another Dotfiles Manager
-    bun # Bun is a fast, modern package manager for JavaScript and TypeScript.
-    docker-client # Docker CLI (without daemon)
-
-    flyctl # Fly.io CLI
-
-    arkade # Kubernetes apps installer
-    alejandra # The Uncompromising Nix Code Formatter
-
-    # bitwarden-cli # The command line vault (Windows, macOS, & Linux).
-
-    actionlint # GitHub Actions linter
-    pre-commit # A framework for managing and maintaining multi-language pre-commit hooks.
-    markdownlint-cli # Command Line Interface for MarkdownLint
-
-    (callPackage ../pkgs/balena-cli.nix {})
-
-    # (callPackage ../pkgs/go-github-apps.nix {})
-
     skopeo # A command line utility for various operations on container images and image repositories
 
-    kubectl # Kubernetes command-line tool
-    k9s # Kubernetes CLI to manage and view your clusters in a terminal UI
+    # gnu coreutils
+    coreutils
+    gawk
+    gnugrep
+    gnused
+    gnutar
 
+    # git
+    git-crypt # transparent file encryption in git
+    git-secret # store private data in git using GPG encryption
+    gnupg
+
+    # javascript & runtimes
+    bun # Bun is a fast, modern package manager for JavaScript and TypeScript
+    nodejs_24 # A JavaScript runtime built on Chrome's V8 JavaScript engine
     uv # An extremely fast Python package and project manager, written in Rust
+
+    # linters & formatters
+    actionlint # GitHub Actions linter
+    alejandra # The Uncompromising Nix Code Formatter
+    hadolint # Dockerfile linter, validate inline bash scripts
+    markdownlint-cli # Command Line Interface for MarkdownLint
+    pre-commit # A framework for managing and maintaining multi-language pre-commit hooks
+    shellcheck # shell script analysis tool
+    shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
+
+    # networking
+    aria2 # A lightweight multi-protocol & multi-source command-line download utility
+    nmap # A utility for network discovery and security auditing
+    socat # replacement of openbsd-netcat
+    tio # simple TTY terminal I/O application
+
+    # utils
+    cowsay
+    fd # simple, fast alternative to find
+    file
+    glow # markdown previewer in terminal
+    htop # interactive process viewer
+    jq # A lightweight and flexible command-line JSON processor
+    neofetch # A CLI system information tool
+    ripgrep # recursively searches directories for a regex pattern
+    tree
+    which
+    yq-go # yaml processor https://github.com/mikefarah/yq
+
+    # custom packages
+    (callPackage ../pkgs/balena-cli.nix {})
   ];
 
   programs = {
