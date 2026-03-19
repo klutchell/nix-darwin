@@ -58,6 +58,8 @@
     bun # Bun is a fast, modern package manager for JavaScript and TypeScript.
     docker-client # Docker CLI (without daemon)
 
+    flyctl # Fly.io CLI
+
     arkade # Kubernetes apps installer
     alejandra # The Uncompromising Nix Code Formatter
 
@@ -65,6 +67,7 @@
 
     actionlint # GitHub Actions linter
     pre-commit # A framework for managing and maintaining multi-language pre-commit hooks.
+    markdownlint-cli # Command Line Interface for MarkdownLint
 
     (callPackage ../pkgs/balena-cli.nix {})
 
