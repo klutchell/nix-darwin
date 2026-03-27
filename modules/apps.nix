@@ -64,6 +64,7 @@
       "homebrew/cask-fonts"
       "homebrew/services"
       "homebrew/cask-versions"
+      "manaflow-ai/cmux"
     ];
 
     # `brew install`
@@ -88,11 +89,11 @@
       "appcleaner"
       "balenaetcher"
       "brave-browser"
-      "cloudflare-warp"
       "capacities"
-      # "chatgpt"
+      "cloudflare-warp"
       "claude"
       "claude-code"
+      "cmux"
       "craft"
       "cryptomator"
       # "docker-desktop"
