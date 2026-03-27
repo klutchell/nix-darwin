@@ -76,6 +76,7 @@
   # Ensures nix-installed binaries are available to apps like Claude Desktop
   launchd.user.envVariables = {
     PATH = builtins.concatStringsSep ":" [
+      "/Users/kyle/.local/bin"
       "/etc/profiles/per-user/kyle/bin"
       "/run/current-system/sw/bin"
       "/nix/var/nix/profiles/default/bin"
