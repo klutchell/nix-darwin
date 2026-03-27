@@ -7,6 +7,11 @@
     "$HOME/.local/bin"
   ];
 
+  home.sessionVariables = {
+    NNN_PLUG = "p:preview-tui";
+    NNN_FIFO = "/tmp/nnn.fifo";
+  };
+
   home.packages = with pkgs; [
     # archives
     p7zip
@@ -197,6 +202,35 @@
       };
     };
 
+    # Terminal File Manager
+    # https://github.com/jarun/nnn
+    nnn = {
+      enable = true;
+      package = pkgs.nnn.override { withNerdIcons = true; };
+      extraPackages = with pkgs; [
+        bat
+        ffmpegthumbnailer
+        mediainfo
+        nsxiv
+      ];
+      plugins = {
+        src = (pkgs.fetchFromGitHub {
+          owner = "jarun";
+          repo = "nnn";
+          rev = "f5f221f684e83aab3444c03eaf3d555cf235f572";
+          hash = "sha256-5oA9BZDvIZgtsxOV4Jll6mV5+fzTiFm0jOGYta96X6U=";
+        }) + "/plugins";
+        mappings = {
+          p = "preview-tui";
+        };
+      };
+      bookmarks = {
+        d = "~/Documents";
+        D = "~/Downloads";
+        s = "~/src";
+      };
+    };
+
     # Smarter cd — tracks frecency for zoxide-powered tools like zsm
     # https://github.com/ajeetdsouza/zoxide
     zoxide = {
@@ -381,8 +415,9 @@
             }
             pane split_direction="vertical" size="50%" {
                 pane size="50%" {
-                    command "yazi"
-                    name "yazi"
+                    command "nnn"
+                    args "-a"
+                    name "nnn"
                 }
                 pane size="50%" {
                     name "terminal"
