@@ -34,6 +34,9 @@
       # # End Nix
       # worktrunk (wt) shell integration — enables directory switching on wt switch
       eval "$(wt config shell init zsh)"
+
+      # safe-chain: wraps npm/yarn/pnpm/bun/pip/uv with supply-chain attack protection
+      [ -f "$HOME/.safe-chain/scripts/init-posix.sh" ] && source "$HOME/.safe-chain/scripts/init-posix.sh"
     '';
 
     oh-my-zsh = {

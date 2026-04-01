@@ -78,6 +78,7 @@
 
     # custom packages
     (callPackage ../pkgs/balena-cli.nix {})
+    (callPackage ../pkgs/safe-chain.nix {})
   ];
 
   programs = {
@@ -349,6 +350,17 @@
       '';
     };
   };
+
+  home.file.".aikido/config.json".text = builtins.toJSON {
+    minimumPackageAgeHours = 24;
+    minimumPackageAgeExclusions = ["@balena/*"];
+  };
+
+  home.activation.safe-chain-setup = config.lib.dag.entryAfter ["writeBoundary"] ''
+    if command -v safe-chain &> /dev/null; then
+      run safe-chain setup 2>/dev/null || true
+    fi
+  '';
 
   home.file.".config/zellij/plugins/zsm.wasm".source = pkgs.fetchurl {
     url = "https://github.com/liam-mackie/zsm/releases/download/v0.4.1/zsm.wasm";

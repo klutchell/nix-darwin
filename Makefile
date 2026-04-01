@@ -64,6 +64,9 @@ fmt:
 update-balena:
 	bash scripts/update-balena-cli.sh
 
+update-safe-chain:
+	bash scripts/update-safe-chain.sh
+
 .PHONY: clean
 clean:
 	rm -rf result
