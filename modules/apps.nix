@@ -106,9 +106,9 @@
       # "logi-options+"
       "macfuse"
       "magicquit"
+      "monitorcontrol"
       "notion"
       "notion-calendar"
-      "obsidian"
       "ollama-app"
       "openvpn-connect"
       "orbstack"
@@ -121,7 +121,6 @@
       "tailscale-app"
       # "ungoogled-chromium"
       "visual-studio-code"
-      # "vlc"
       "yubico-yubikey-manager"
       "zoom"
     ];
