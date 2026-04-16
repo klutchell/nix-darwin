@@ -78,6 +78,7 @@
       "ykman" # YubiKey manager
       "worktrunk" # Git worktree management CLI
       # "bd" # A memory upgrade for your coding agent
+      "mole" # Deep clean and optimize your Mac. (https://github.com/tw93/Mole)
     ];
 
     # `brew install --cask`
@@ -121,7 +122,7 @@
       "tailscale-app"
       # "ungoogled-chromium"
       "visual-studio-code"
-      "yubico-yubikey-manager"
+      "yubico-authenticator"
       "zoom"
     ];
   };
