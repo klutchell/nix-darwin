@@ -213,7 +213,7 @@
     # https://github.com/jarun/nnn
     nnn = {
       enable = true;
-      package = pkgs.nnn.override { withNerdIcons = true; };
+      package = pkgs.nnn.override {withNerdIcons = true;};
       extraPackages = with pkgs; [
         bat
         ffmpegthumbnailer
@@ -221,12 +221,14 @@
         nsxiv
       ];
       plugins = {
-        src = (pkgs.fetchFromGitHub {
-          owner = "jarun";
-          repo = "nnn";
-          rev = "f5f221f684e83aab3444c03eaf3d555cf235f572";
-          hash = "sha256-5oA9BZDvIZgtsxOV4Jll6mV5+fzTiFm0jOGYta96X6U=";
-        }) + "/plugins";
+        src =
+          (pkgs.fetchFromGitHub {
+            owner = "jarun";
+            repo = "nnn";
+            rev = "f5f221f684e83aab3444c03eaf3d555cf235f572";
+            hash = "sha256-5oA9BZDvIZgtsxOV4Jll6mV5+fzTiFm0jOGYta96X6U=";
+          })
+          + "/plugins";
         mappings = {
           p = "preview-tui";
         };
@@ -359,7 +361,7 @@
 
   home.file.".aikido/config.json".text = builtins.toJSON {
     minimumPackageAgeHours = 24;
-    minimumPackageAgeExclusions = ["@balena/*"];
+    minimumPackageAgeExclusions = ["@balena/*" "docker-storage-gc"];
   };
 
   home.activation.safe-chain-setup = config.lib.dag.entryAfter ["writeBoundary"] ''
