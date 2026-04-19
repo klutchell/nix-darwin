@@ -69,7 +69,7 @@
         ./modules/system.nix
         ./modules/apps.nix
         ./modules/rclone-sync.nix
-        ./modules/claude-scheduled.nix
+        # ./modules/claude-scheduled.nix
         ./modules/host-users.nix
 
         # home manager
