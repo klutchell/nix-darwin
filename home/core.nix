@@ -53,6 +53,8 @@
     alejandra # The Uncompromising Nix Code Formatter
     hadolint # Dockerfile linter, validate inline bash scripts
     markdownlint-cli # Command Line Interface for MarkdownLint
+    nil # Nix language server (required by Zed nix extension)
+    nixd # Nix language server with deep evaluation support (required by Zed nix extension)
     pre-commit # A framework for managing and maintaining multi-language pre-commit hooks
     shellcheck # shell script analysis tool
     shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
