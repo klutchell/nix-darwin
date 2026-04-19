@@ -10,6 +10,10 @@
   home.sessionVariables = {
     NNN_PLUG = "p:preview-tui";
     NNN_FIFO = "/tmp/nnn.fifo";
+
+    CLAUDE_CODE_EFFORT_LEVEL = "max";
+    CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING = "1";
+    CLAUDE_CODE_NO_FLICKER = "1";
   };
 
   home.packages = with pkgs; [
