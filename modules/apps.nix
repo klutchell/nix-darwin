@@ -85,7 +85,7 @@
     casks = [
       # # https://nikitabobko.github.io/AeroSpace/guide#installation
       # "nikitabobko/tap/aerospace"
-      # "alcove"
+      "alcove"
       "antigravity"
       "appcleaner"
       "balenaetcher"
@@ -123,6 +123,7 @@
       # "ungoogled-chromium"
       "visual-studio-code"
       "yubico-authenticator"
+      "zed"
       "zoom"
     ];
   };
