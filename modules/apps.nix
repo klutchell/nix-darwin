@@ -86,7 +86,7 @@
       # # https://nikitabobko.github.io/AeroSpace/guide#installation
       # "nikitabobko/tap/aerospace"
       "alcove"
-      "antigravity"
+      # "antigravity"
       "appcleaner"
       "balenaetcher"
       "brave-browser"
