@@ -77,7 +77,6 @@
       # "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
       "ykman" # YubiKey manager
       "worktrunk" # Git worktree management CLI
-      # "bd" # A memory upgrade for your coding agent
       "mole" # Deep clean and optimize your Mac. (https://github.com/tw93/Mole)
     ];
 
@@ -86,16 +85,12 @@
       # # https://nikitabobko.github.io/AeroSpace/guide#installation
       # "nikitabobko/tap/aerospace"
       "alcove"
-      # "antigravity"
       "appcleaner"
       "balenaetcher"
       "brave-browser"
-      "capacities"
       "cloudflare-warp"
       "claude"
-      "claude-code"
-      "cmux"
-      "craft"
+      "claude-code@latest"
       "cryptomator"
       # "docker-desktop"
       "fliqlo"
