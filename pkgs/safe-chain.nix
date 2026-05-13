@@ -1,14 +1,14 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.stdenv.mkDerivation rec {
   pname = "safe-chain";
-  version = "1.4.6";
+  version = "1.5.3";
 
   dontStrip = true;
   dontUnpack = true;
 
   src = pkgs.fetchurl {
     url = "https://github.com/AikidoSec/safe-chain/releases/download/${version}/safe-chain-macos-arm64";
-    sha256 = "sha256-6JqIdNvG9VsNDxmp2o9wzik0ARjiXG5QyJiyjknpGmQ=";
+    sha256 = "sha256-5L723GUHEYma1UtQKXNrlKQRkMw209Cw+HRsMVxXvLk=";
   };
 
   installPhase = ''
