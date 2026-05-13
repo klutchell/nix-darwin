@@ -359,9 +359,28 @@
     };
   };
 
-  home.file.".aikido/config.json".text = builtins.toJSON {
+  home.file.".safe-chain/config.json".text = builtins.toJSON {
     minimumPackageAgeHours = 24;
-    minimumPackageAgeExclusions = ["@balena/*" "docker-storage-gc"];
+    minimumPackageAgeExclusions = [
+      "@balena/*"
+      "balena-cli"
+      "balena-sdk"
+      "balena-auth"
+      "balena-config-json"
+      "balena-device-init"
+      "balena-preload"
+      "balena-request"
+      "balena-register-device"
+      "balena-hup-action-utils"
+      "balena-errors"
+      "balena-semver"
+      "balena-device-config"
+      "balena-image-fs"
+      "balena-settings-client"
+      "balena-settings-storage"
+      "docker-storage-gc"
+      "etcher-sdk"
+    ];
   };
 
   home.activation.safe-chain-setup = config.lib.dag.entryAfter ["writeBoundary"] ''
