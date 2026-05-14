@@ -361,7 +361,7 @@
 
   home.file.".safe-chain/config.json".text = builtins.toJSON {
     minimumPackageAgeHours = 24;
-    minimumPackageAgeExclusions = [
+    npm.minimumPackageAgeExclusions = [
       "@balena/*"
       "analytics-client"
       "balena-auth"
