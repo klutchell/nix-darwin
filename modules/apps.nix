@@ -100,6 +100,7 @@
       "iina"
       "jordanbaird-ice"
       # "logi-options+"
+      "league-of-legends" # installer only
       "macfuse"
       "magicquit"
       "monitorcontrol"
