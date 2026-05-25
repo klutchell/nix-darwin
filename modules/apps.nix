@@ -98,7 +98,6 @@
       # "google-drive"
       # "hazel"
       "iina"
-      "jordanbaird-ice"
       # "logi-options+"
       "league-of-legends" # installer only
       "macfuse"
