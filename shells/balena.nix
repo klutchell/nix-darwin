@@ -70,11 +70,21 @@
           # Disables the use of a keychain in case it's not initialized
           export SAML2AWS_DISABLE_KEYCHAIN=false
 
-          # Automatically downloads a compatible browser for authentication
+          # Use saml2aws's bundled chromium (version-matched to its playwright-go bindings);
+          # native browsers like Vivaldi/Brave crash under playwright's CDP pipe transport.
+          # Env var triggers playwright.Install at login time (cmd/saml2aws/main.go:126).
           export SAML2AWS_AUTO_BROWSER_DOWNLOAD=true
+
+          # Clear stale browser_executable_path: saml2aws gates --browser-executable-path
+          # on `!= ""` (pkg/flags/flags.go), so passing "" is a no-op. Deleting the line
+          # lets omitempty (pkg/cfg/cfg.go) drop the field on the next configure write.
+          [ -f ~/.saml2aws ] && sed -i.bak '/^browser_executable_path/d' ~/.saml2aws \
+            && rm -f ~/.saml2aws.bak
 
           saml2aws configure --profile default --idp-provider Browser \
             --url "https://accounts.google.com/o/saml2/initsso?idpid=C04e1utuw&spid=447476946884&forceauthn=false" \
+            --browser-type chromium \
+            --session-duration 43200 \
             --skip-prompt
 
           saml2aws login -p "$AWS_PROFILE"
