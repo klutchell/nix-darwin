@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   home.sessionPath = [
@@ -357,6 +358,26 @@
         max-cache-ttl 86400
       '';
     };
+  };
+
+  # home-manager's services.gpg-agent on Darwin invokes `gpg-agent --supervised`,
+  # which expects systemd's LISTEN_FDNAMES protocol that launchd doesn't provide —
+  # the agent exits 2 on every spawn and KeepAlive restart-loops it. Override the
+  # plist to run `--daemon --no-detach` instead, binding the socket at the GPG
+  # default path so sandboxed clients (Claude Code) can reach it via one allow rule.
+  launchd.agents.gpg-agent.config = lib.mkForce {
+    Label = "org.nix-community.home.gpg-agent";
+    EnvironmentVariables.GNUPGHOME = "${config.home.homeDirectory}/.gnupg";
+    ProcessType = "Background";
+    RunAtLoad = true;
+    KeepAlive = true;
+    ProgramArguments = [
+      "${pkgs.gnupg}/bin/gpg-agent"
+      "--homedir"
+      "${config.home.homeDirectory}/.gnupg"
+      "--daemon"
+      "--no-detach"
+    ];
   };
 
   home.file.".safe-chain/config.json".text = builtins.toJSON {
