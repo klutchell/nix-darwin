@@ -361,22 +361,23 @@
   };
 
   # home-manager's services.gpg-agent on Darwin invokes `gpg-agent --supervised`,
-  # which expects systemd's LISTEN_FDNAMES protocol that launchd doesn't provide —
-  # the agent exits 2 on every spawn and KeepAlive restart-loops it. Override the
-  # plist to run `--daemon --no-detach` instead, binding the socket at the GPG
-  # default path so sandboxed clients (Claude Code) can reach it via one allow rule.
+  # which expects systemd's LISTEN_FDNAMES protocol that launchd doesn't provide.
+  # gpg-agent also forks unconditionally in --daemon mode (--no-detach only
+  # suppresses setsid, not fork), so launchd can never track the real process.
+  # Upstream-recommended launchd pattern is `gpgconf --launch gpg-agent`:
+  # idempotent kickstarter that spawns the agent if absent, no-ops if present,
+  # exits 0 immediately. Crash recovery happens via gpg's own auto-spawn from
+  # any normal-shell gpg invocation — no launchd-side supervision needed.
   launchd.agents.gpg-agent.config = lib.mkForce {
     Label = "org.nix-community.home.gpg-agent";
     EnvironmentVariables.GNUPGHOME = "${config.home.homeDirectory}/.gnupg";
     ProcessType = "Background";
     RunAtLoad = true;
-    KeepAlive = true;
+    KeepAlive = false;
     ProgramArguments = [
-      "${pkgs.gnupg}/bin/gpg-agent"
-      "--homedir"
-      "${config.home.homeDirectory}/.gnupg"
-      "--daemon"
-      "--no-detach"
+      "${pkgs.gnupg}/bin/gpgconf"
+      "--launch"
+      "gpg-agent"
     ];
   };
 
