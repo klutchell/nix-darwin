@@ -463,6 +463,7 @@
   home.file.".config/ghostty/config".text = ''
     macos-option-as-alt = true
     copy-on-select = clipboard
+    scrollback-limit = 100000000
   '';
 
   home.file.".claude/hooks/github-guard.sh" = {
