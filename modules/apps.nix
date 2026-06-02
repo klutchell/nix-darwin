@@ -32,6 +32,11 @@
       upgrade = true;
       # 'zap': uninstalls all formulae(and related files) not listed here.
       cleanup = "zap";
+      # Homebrew 5.1.x's bundle-subcommand refactor made `brew bundle install
+      # --cleanup` require an explicit force flag. nix-darwin doesn't pass it yet
+      # (fix is unmerged PR nix-darwin#1774), so add it ourselves. Remove once
+      # #1774 lands and the flake input is updated past it.
+      extraFlags = [ "--force-cleanup" ];
     };
 
     # Applications to install from Mac App Store using mas.
