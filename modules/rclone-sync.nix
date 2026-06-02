@@ -16,6 +16,28 @@
 
     log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"; }
 
+    # Prevent overlapping runs (launchd fires on a fixed interval regardless of
+    # whether the prior run finished). macOS has no flock; use an atomic mkdir lock
+    # with a PID file so a crashed run's lock can be reclaimed.
+    LOCK="$LOG_DIR/.bisync.lock"
+    if ! mkdir "$LOCK" 2>/dev/null; then
+      if [ -f "$LOCK/pid" ] && ! kill -0 "$(cat "$LOCK/pid")" 2>/dev/null; then
+        log "Reclaiming stale lock from dead PID $(cat "$LOCK/pid")"
+        rm -rf "$LOCK"; mkdir "$LOCK"
+      else
+        log "Another bisync run is active — skipping this tick"
+        exit 0
+      fi
+    fi
+    echo $$ > "$LOCK/pid"
+    trap 'rm -rf "$LOCK"' EXIT
+
+    # Rotate the log if it grows past 10 MB (wc -c is POSIX-portable; avoids the
+    # GNU-vs-BSD `stat` size-flag divergence on nix-darwin).
+    if [ -f "$LOG_FILE" ] && [ "$(wc -c < "$LOG_FILE")" -gt 10485760 ]; then
+      mv -f "$LOG_FILE" "$LOG_FILE.1"
+    fi
+
     # Require .syncrc to exist
     if [ ! -f "$SYNCRC" ]; then
       log "No .syncrc found — nothing to sync"
@@ -40,12 +62,29 @@
       sleep 15
     fi
 
-    # Auto-resync if state files are missing
+    # Auto-resync ONLY when no prior bisync listings exist, with a 6h cooldown so a
+    # failing resync can't re-fire a full-tree relisting every tick.
+    #
+    # rclone names listings <canonical-path1>..<canonical-path2>.path{1,2}.lst. The
+    # local path's canonical form carries a backend prefix (e.g. `local__`) that varies
+    # by rclone version, so glob for the gdrive pair rather than reconstructing the exact
+    # name. The old reconstruction omitted the prefix, never matched, and forced a full
+    # --resync on EVERY run (max API load — the opposite of what we want).
     BISYNC_STATE="$HOME/Library/Caches/rclone/bisync"
-    STATE_KEY=$(echo "''${ICLOUD_BASE}..''${GDRIVE_BASE}" | sed 's|^/||; s|[/ :]|_|g')
+    RESYNC_COOLDOWN="$BISYNC_STATE/.last-resync-fail"
     RESYNC_FLAG=""
-    if [ ! -f "$BISYNC_STATE/$STATE_KEY.path1.lst" ] || [ ! -f "$BISYNC_STATE/$STATE_KEY.path2.lst" ]; then
-      log "No prior state files — running with --resync"
+    HAVE_STATE=0
+    for f in "$BISYNC_STATE"/*gdrive_.path1.lst; do
+      if [ -s "$f" ]; then HAVE_STATE=1; fi
+    done
+    if [ "$HAVE_STATE" -eq 0 ]; then
+      # In cooldown if the marker exists and is younger than 360 min. `find -mmin`
+      # is identical on BSD (launchd PATH) and GNU, unlike `date -r FILE`.
+      if [ -f "$RESYNC_COOLDOWN" ] && [ -z "$(find "$RESYNC_COOLDOWN" -mmin +360 2>/dev/null)" ]; then
+        log "State missing but a resync failed < 6h ago — skipping to avoid storm"
+        exit 0
+      fi
+      log "No prior bisync listings — running with --resync"
       RESYNC_FLAG="--resync"
     fi
 
@@ -58,17 +97,28 @@
       --conflict-resolve newer \
       --resilient \
       --recover \
+      --max-lock 2m \
+      --tpslimit 6 \
+      --tpslimit-burst 6 \
+      --transfers 2 \
+      --checkers 4 \
+      --low-level-retries 20 \
+      --drive-pacer-min-sleep 200ms \
+      --local-no-check-updated \
+      --drive-skip-gdocs \
       $RESYNC_FLAG \
       --filter '+ RCLONE_TEST' \
       --filter-from "$SYNCRC" \
       >> "$LOG_FILE" 2>&1; then
       log "Bisync completed successfully"
+      rm -f "$RESYNC_COOLDOWN"
       # Clean empty subdirectories on both sides
       find "$ICLOUD_BASE" -mindepth 1 -type d -empty -delete 2>/dev/null || true
       $RCLONE rmdirs "$GDRIVE_BASE" --leave-root >> "$LOG_FILE" 2>&1 || true
     else
       EXIT_CODE=$?
       log "Bisync failed with exit code $EXIT_CODE"
+      [ -n "$RESYNC_FLAG" ] && touch "$RESYNC_COOLDOWN"
       /usr/bin/osascript -e "display notification \"rclone bisync failed (exit $EXIT_CODE). Check ~/.local/log/rclone-bisync.log\" with title \"rclone bisync\""
       exit 1
     fi
@@ -80,7 +130,7 @@ in {
     serviceConfig = {
       Label = "com.kyle.rclone-bisync";
       ProgramArguments = ["${syncScript}"];
-      StartInterval = 600;
+      StartInterval = 1800;
       RunAtLoad = true;
       StandardOutPath = "/Users/kyle/.local/log/rclone-bisync-stdout.log";
       StandardErrorPath = "/Users/kyle/.local/log/rclone-bisync-stderr.log";
