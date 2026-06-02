@@ -28,7 +28,7 @@
     # containers & kubernetes
     arkade # Kubernetes apps installer
     buildah # Tool which facilitates building OCI images
-    docker-client # Docker CLI (without daemon)
+    docker_29 # Docker CLI (without daemon; client-only by default on macOS). Was docker-client, but that aliases docker_28 which is now flagged insecure
     flyctl # Fly.io CLI
     k9s # Kubernetes CLI to manage and view your clusters in a terminal UI
     kubectl # Kubernetes command-line tool
