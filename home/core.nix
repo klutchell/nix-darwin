@@ -77,7 +77,7 @@
     glow # markdown previewer in terminal
     htop # interactive process viewer
     jq # A lightweight and flexible command-line JSON processor
-    neofetch # A CLI system information tool
+    fastfetch # A CLI system information tool (neofetch replacement)
     ripgrep # recursively searches directories for a regex pattern
     tree
     which
