@@ -79,6 +79,7 @@
       "httpie" # http client
       "diffutils" # diff tool
       "mas" # Mac App Store CLI
+      "sem-cli" # Semantic version control
       # "bitwarden-cli" # The command line vault (Windows, macOS, & Linux).
       "ykman" # YubiKey manager
       "worktrunk" # Git worktree management CLI
