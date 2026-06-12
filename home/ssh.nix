@@ -40,6 +40,9 @@ in {
         IdentityFile = "~/.ssh/id_ed25519";
         # Load the key into the agent on first use (passphrase from the macOS
         # Keychain) so it is present to be forwarded to misc1/misc2.
+        # UseKeychain is Apple-only; IgnoreUnknown lets non-Apple ssh skip it
+        # instead of erroring with "Bad configuration option".
+        IgnoreUnknown = "UseKeychain";
         AddKeysToAgent = "yes";
         UseKeychain = "yes";
       };
