@@ -123,6 +123,7 @@
       "signal"
       "spotify"
       "tailscale-app"
+      "telegram"
       # "ungoogled-chromium"
       "visual-studio-code"
       "vivaldi"
