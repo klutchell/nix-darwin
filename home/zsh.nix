@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs.zsh = {
     enable = true;
 
@@ -20,6 +24,9 @@
     profileExtra = ''
       # Set PATH, MANPATH, etc., for Homebrew.
       eval "$(/opt/homebrew/bin/brew shellenv)"
+      # `brew shellenv` prepends /opt/homebrew/bin to PATH; re-assert the nix
+      # profiles ahead of it so nix packages (e.g. python/python3) win.
+      export PATH="${config.home.profileDirectory}/bin:/run/current-system/sw/bin:$PATH"
       # export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
       # Add arkade binary directory to your PATH variable
       export PATH="$PATH:$HOME/.arkade/bin"
