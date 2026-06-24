@@ -36,7 +36,7 @@
       # --cleanup` require an explicit force flag. nix-darwin doesn't pass it yet
       # (fix is unmerged PR nix-darwin#1774), so add it ourselves. Remove once
       # #1774 lands and the flake input is updated past it.
-      extraFlags = [ "--force-cleanup" ];
+      extraFlags = ["--force-cleanup"];
     };
 
     # Applications to install from Mac App Store using mas.
@@ -62,6 +62,7 @@
       SaveToReader = 1640236961;
       SimpleLoginForSafari = 6475835429;
       # FolderPreview = 6698876601;
+      Uplock = 6469049274;
       uBlockOriginLite = 6745342698;
     };
 
@@ -124,9 +125,9 @@
       "spotify"
       "tailscale-app"
       "telegram"
-      # "ungoogled-chromium"
+      "ungoogled-chromium"
       "visual-studio-code"
-      "vivaldi"
+      # "vivaldi"
       "yubico-authenticator"
       "zed"
       "zoom"
