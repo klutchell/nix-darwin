@@ -26,6 +26,8 @@
   # But on macOS, homebrew has a much larger selection of apps than nixpkgs, especially for GUI apps!
   homebrew = {
     enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
 
     onActivation = {
       autoUpdate = true;
@@ -37,6 +39,10 @@
       # (fix is unmerged PR nix-darwin#1774), so add it ourselves. Remove once
       # #1774 lands and the flake input is updated past it.
       extraFlags = ["--force-cleanup"];
+      extraEnv = {
+        HOMEBREW_NO_ANALYTICS = "1";
+        HOMEBREW_NO_ENV_HINTS = "1";
+      };
     };
 
     # Applications to install from Mac App Store using mas.
