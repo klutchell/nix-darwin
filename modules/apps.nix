@@ -123,7 +123,6 @@
       "notion-calendar"
       "openvpn-connect"
       "orbstack"
-      "pronotes"
       "protonvpn"
       "raycast"
       "setapp"
