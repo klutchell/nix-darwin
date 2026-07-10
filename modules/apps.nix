@@ -77,7 +77,6 @@
       "homebrew/cask-fonts"
       "homebrew/services"
       "homebrew/cask-versions"
-      "manaflow-ai/cmux"
     ];
 
     # `brew install`
@@ -122,7 +121,7 @@
       "notion"
       "notion-calendar"
       "openvpn-connect"
-      "orbstack"
+      "podman-desktop"
       "protonvpn"
       "raycast"
       "setapp"
@@ -132,7 +131,6 @@
       "telegram"
       "ungoogled-chromium"
       "visual-studio-code"
-      # "vivaldi"
       "yubico-authenticator"
       "zed"
       "zoom"
