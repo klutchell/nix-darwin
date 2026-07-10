@@ -27,6 +27,23 @@
     #   ]))
   ];
 
+  # saml2aws 2.36.19 bundles playwright-go v0.4702.0, whose driver is fetched
+  # from playwright.azureedge.net — a CDN Microsoft retired 2026-07-08, so login
+  # 404s on the driver download (Versent/saml2aws#1531). playwright-go < v0.6100.0
+  # can't self-bootstrap anymore. Reconstruct the driver from the still-live npm
+  # playwright-core package (the exact thing newer playwright-go assembles); the
+  # shellHook links this + a node binary into the cache dir saml2aws checks, so
+  # the up-to-date probe passes and the dead download is never attempted.
+  playwrightGoDriver = pkgs.runCommand "ms-playwright-go-1.47.2" {
+    src = pkgs.fetchurl {
+      url = "https://registry.npmjs.org/playwright-core/-/playwright-core-1.47.2.tgz";
+      hash = "sha512-3JvMfF+9LJfe16l7AbSmU555PaTl2tPyQsVInqm3id16pdDfvZ8TTZ/pyzmkbDrZTQefyzU7AIHlZqQnxpqHVQ==";
+    };
+  } ''
+    mkdir -p $out
+    tar -xzf $src -C $out
+  '';
+
   # Function to create environment-specific shells
   mkBalenaShell = {
     name,
@@ -55,6 +72,14 @@
         export BALENA_ACCOUNT="${account}"
         export BALENA_IDP_ARN="arn:aws:iam::${account}:saml-provider/Google"
         export BALENA_ROLE_ARN="arn:aws:iam::${account}:role/federated-admin"
+
+        # Seed saml2aws's playwright-go driver so login skips the retired CDN
+        # (see playwrightGoDriver above). Idempotent symlinks into the cache dir
+        # that playwright-go v0.4702.0 probes on darwin (~/Library/Caches).
+        _pw_driver="$HOME/Library/Caches/ms-playwright-go/1.47.2"
+        mkdir -p "$_pw_driver"
+        ln -sfn "${playwrightGoDriver}/package" "$_pw_driver/package"
+        ln -sfn "${pkgs.nodejs_22}/bin/node" "$_pw_driver/node"
 
         # Create login function
         balena-login() {
