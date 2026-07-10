@@ -26,11 +26,11 @@
     zstd
 
     # containers & kubernetes
-    arkade # Kubernetes apps installer
     buildah # Tool which facilitates building OCI images
     docker_29 # Docker CLI (without daemon; client-only by default on macOS). Was docker-client, but that aliases docker_28 which is now flagged insecure
     flyctl # Fly.io CLI
     k9s # Kubernetes CLI to manage and view your clusters in a terminal UI
+    kind # Kubernetes in Docker (KIND) is a tool for running local Kubernetes clusters using Docker container "nodes"
     kubectl # Kubernetes command-line tool
     podman # Program for managing pods, containers and container images
     podman-compose # Implementation of docker-compose with podman backend
