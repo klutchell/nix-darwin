@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   programs.zsh = {
@@ -20,31 +21,35 @@
     #   [[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
     # '';
 
-    # https://checkoway.net/musings/nix/
     profileExtra = ''
-      # Set PATH, MANPATH, etc., for Homebrew.
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-      # `brew shellenv` prepends /opt/homebrew/bin to PATH; re-assert the nix
-      # profiles ahead of it so nix packages (e.g. python/python3) win.
-      export PATH="${config.home.profileDirectory}/bin:/run/current-system/sw/bin:$PATH"
-      # export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
       # Add arkade binary directory to your PATH variable
       export PATH="$PATH:$HOME/.arkade/bin"
       export ACTUATED_URL="https://actuated-controller.o6s.io"
     '';
 
-    initContent = ''
-      # # Nix
-      # if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-      #   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-      # fi
-      # # End Nix
-      # worktrunk (wt) shell integration — enables directory switching on wt switch
-      eval "$(wt config shell init zsh)"
+    initContent = lib.mkMerge [
+      ''
+        # # https://checkoway.net/musings/nix/
+        # # Nix
+        # if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+        #   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        # fi
+        # # End Nix
 
-      # safe-chain: wraps npm/yarn/pnpm/bun/pip/uv with supply-chain attack protection
-      [ -f "$HOME/.cache/safe-chain/current/scripts/init-posix.sh" ] && source "$HOME/.cache/safe-chain/current/scripts/init-posix.sh"
-    '';
+        # worktrunk (wt) shell integration — enables directory switching on wt switch
+        eval "$(wt config shell init zsh)"
+
+        # safe-chain: wraps npm/yarn/pnpm/bun/pip/uv with supply-chain attack protection
+        [ -f "$HOME/.cache/safe-chain/current/scripts/init-posix.sh" ] && source "$HOME/.cache/safe-chain/current/scripts/init-posix.sh"
+      ''
+      # Homebrew's `enableZshIntegration` runs `brew shellenv` from /etc/zshrc,
+      # which is sourced before ~/.zshrc and prepends /opt/homebrew/bin to PATH.
+      # Re-assert the nix profiles here — mkAfter pins this to the very end of
+      # ~/.zshrc, so nix always wins regardless of how/when Homebrew is added.
+      (lib.mkAfter ''
+        export PATH="${config.home.profileDirectory}/bin:/run/current-system/sw/bin:$PATH"
+      '')
+    ];
 
     oh-my-zsh = {
       enable = true;
