@@ -85,44 +85,72 @@
         balena-login() {
           echo "🔐 Logging into ${name}..."
 
-          # aws-saml \
-          #   --profile "$AWS_PROFILE" \
-          #   --region "$AWS_REGION" \
-          #   --session-duration 43200 \
-          #   --idp-arn "$BALENA_IDP_ARN" \
-          #   --role-arn "$BALENA_ROLE_ARN"
-
           # Disables the use of a keychain in case it's not initialized
           export SAML2AWS_DISABLE_KEYCHAIN=false
+
+          # Pin the role saml2aws assumes to THIS shell's account. SAML2AWS_ROLE
+          # is the env form of the global --role flag (there is no configure/
+          # login --role-arn); setting it as an env var avoids kingpin flag-
+          # placement issues and makes `login` select the role non-interactively.
+          # This is the crux of why $AWS_PROFILE and the role are independent:
+          # the profile only names where creds are written; the role is chosen
+          # from the SAML assertion. Unpinned, login prompts (or auto-picks) and
+          # can write the wrong account's creds into this shell's profile.
+          export SAML2AWS_ROLE="$BALENA_ROLE_ARN"
 
           # Use saml2aws's bundled chromium (version-matched to its playwright-go bindings);
           # native browsers like Vivaldi/Brave crash under playwright's CDP pipe transport.
           # Env var triggers playwright.Install at login time (cmd/saml2aws/main.go:126).
           export SAML2AWS_AUTO_BROWSER_DOWNLOAD=true
 
-          # Clear stale browser_executable_path: saml2aws gates --browser-executable-path
-          # on `!= ""` (pkg/flags/flags.go), so passing "" is a no-op. Deleting the line
-          # lets omitempty (pkg/cfg/cfg.go) drop the field on the next configure write.
-          [ -f ~/.saml2aws ] && sed -i.bak '/^browser_executable_path/d' ~/.saml2aws \
-            && rm -f ~/.saml2aws.bak
+          # Clear stale browser_executable_path and browser_autofill. saml2aws
+          # applies both as "set but never clear" overrides — the first is gated
+          # on `!= ""` and the second on `if commonFlags.BrowserAutoFill`
+          # (pkg/flags/flags.go:90) — so a flag/env can turn them ON but not OFF.
+          # Deleting the lines lets omitempty (pkg/cfg/cfg.go) drop the fields on
+          # the next configure write. browser_autofill=true is useless here and
+          # noisy: its autofill JS dereferences a null password field on Google's
+          # email-first login page (browser.go:246), logging a harmless TypeError.
+          [ -f ~/.saml2aws ] && sed -i.bak -e '/^browser_executable_path/d' \
+            -e '/^browser_autofill/d' ~/.saml2aws && rm -f ~/.saml2aws.bak
 
-          saml2aws configure --profile default --idp-provider Browser \
+          # saml2aws persists the browser SSO session here but does not create
+          # the dir; without it every login is a fresh browser auth ("Error
+          # saving storage state ... no such file or directory").
+          mkdir -p "$HOME/.aws/saml2aws"
+
+          # Guard configure: an unchecked failure here (e.g. a bad flag) let
+          # login run against stale config and "succeed" with the wrong role.
+          if ! saml2aws configure --profile "$AWS_PROFILE" --idp-provider Browser \
             --url "https://accounts.google.com/o/saml2/initsso?idpid=C04e1utuw&spid=447476946884&forceauthn=false" \
             --browser-type chromium \
             --session-duration 43200 \
-            --skip-prompt
-
-          saml2aws login -p "$AWS_PROFILE"
-
-          if [ $? -eq 0 ]; then
-            echo "✅ AWS authentication successful"
-            echo "🔄 Updating kubeconfig..."
-            aws eks update-kubeconfig --name "$BALENA_CLUSTER" --profile "$AWS_PROFILE"
-            kubectl config use-context "$KUBECTL_CONTEXT"
-            echo "✅ Kubernetes context set to ${name}"
-          else
-            echo "❌ AWS authentication failed"
+            --skip-prompt; then
+            echo "❌ saml2aws configure failed"
+            return 1
           fi
+
+          # --force: re-assume the pinned role every time. saml2aws's cache
+          # check is expiry-based, not identity-based, so without this a profile
+          # holding still-valid creds for a DIFFERENT account (e.g. a role picked
+          # before pinning) is silently reused instead of switching accounts.
+          if ! saml2aws login -p "$AWS_PROFILE" --force; then
+            echo "❌ AWS authentication failed"
+            return 1
+          fi
+          echo "✅ AWS authentication successful"
+
+          echo "🔄 Updating kubeconfig..."
+          if ! aws eks update-kubeconfig --name "$BALENA_CLUSTER" --profile "$AWS_PROFILE"; then
+            echo "❌ Cluster ${cluster} not found in account ${account} — the assumed role is likely for the wrong account."
+            return 1
+          fi
+
+          if ! kubectl config use-context "$KUBECTL_CONTEXT"; then
+            echo "❌ Failed to switch to kubectl context ${name}"
+            return 1
+          fi
+          echo "✅ Kubernetes context set to ${name}"
         }
 
         # get suspend resume reconcile
