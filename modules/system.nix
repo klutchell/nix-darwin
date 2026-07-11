@@ -19,9 +19,6 @@
     activationScripts.postActivation.text = ''
       sudo -u kyle /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
-      # Point Docker socket to OrbStack
-      ln -sf /Users/kyle/.orbstack/run/docker.sock /var/run/docker.sock
-
       # Make nix-installed binaries visible to GUI apps (Podman Desktop, Claude
       # Desktop, etc.). GUI apps inherit PATH from the launchd user domain, not
       # the shell. `launchd.user.envVariables` uses an ephemeral `launchctl
@@ -40,6 +37,14 @@
         "/usr/sbin"
         "/sbin"
       ]}" || true
+
+      # Expose selected nix CLIs to GUI apps (Podman Desktop) that discover
+      # tools by scanning /usr/local/bin, not $PATH. Symlinks are overwritten
+      # each switch. Extend the list as needed.
+      mkdir -p /usr/local/bin
+      for b in podman kubectl kind; do
+        ln -sf /etc/profiles/per-user/kyle/bin/$b /usr/local/bin/$b
+      done
     '';
 
     primaryUser = "kyle";
