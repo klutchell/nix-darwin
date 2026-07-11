@@ -140,9 +140,13 @@
           fi
           echo "✅ AWS authentication successful"
 
+          # Pass --region explicitly: the EKS call must target THIS shell's
+          # region, not whatever ambient AWS_REGION/AWS config happens to resolve.
           echo "🔄 Updating kubeconfig..."
-          if ! aws eks update-kubeconfig --name "$BALENA_CLUSTER" --profile "$AWS_PROFILE"; then
-            echo "❌ Cluster ${cluster} not found in account ${account} — the assumed role is likely for the wrong account."
+          if ! aws eks update-kubeconfig --name "$BALENA_CLUSTER" --region "$AWS_REGION" --profile "$AWS_PROFILE"; then
+            echo "❌ Cluster ${cluster} not found in ${region} (account ${account})."
+            echo "   Verify the name/region/account for this shell:"
+            echo "   aws eks list-clusters --region ${region} --profile $AWS_PROFILE"
             return 1
           fi
 
@@ -252,8 +256,8 @@ in {
   staging-eu = mkBalenaShell {
     name = "Balena Staging EU";
     profile = "balena-staging-eu";
-    context = "arn:aws:eks:eu-central-1:567579488761:cluster/staging-eks-eu-1";
-    cluster = "staging-eks-eu-1";
+    context = "arn:aws:eks:eu-central-1:567579488761:cluster/staging-eks-1";
+    cluster = "staging-eks-1";
     account = "567579488761";
     region = "eu-central-1";
   };
