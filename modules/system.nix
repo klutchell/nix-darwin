@@ -19,8 +19,32 @@
     activationScripts.postActivation.text = ''
       sudo -u kyle /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
-      # Point Docker socket to OrbStack
-      ln -sf /Users/kyle/.orbstack/run/docker.sock /var/run/docker.sock
+      # Make nix-installed binaries visible to GUI apps (Podman Desktop, Claude
+      # Desktop, etc.). GUI apps inherit PATH from the launchd user domain, not
+      # the shell. `launchd.user.envVariables` uses an ephemeral `launchctl
+      # setenv` that runs only at switch and is wiped on reboot; instead we write
+      # the persistent domain config, which survives reboots (applied at domain
+      # bootstrap). Requires ONE reboot to take effect. Reversible: delete this
+      # line and reboot.
+      launchctl config user path "${builtins.concatStringsSep ":" [
+        "/Users/kyle/.local/bin"
+        "/etc/profiles/per-user/kyle/bin"
+        "/run/current-system/sw/bin"
+        "/nix/var/nix/profiles/default/bin"
+        "/usr/local/bin"
+        "/usr/bin"
+        "/bin"
+        "/usr/sbin"
+        "/sbin"
+      ]}" || true
+
+      # Expose selected nix CLIs to GUI apps (Podman Desktop) that discover
+      # tools by scanning /usr/local/bin, not $PATH. Symlinks are overwritten
+      # each switch. Extend the list as needed.
+      mkdir -p /usr/local/bin
+      for b in podman kubectl kind; do
+        ln -sf /etc/profiles/per-user/kyle/bin/$b /usr/local/bin/$b
+      done
     '';
 
     primaryUser = "kyle";
@@ -70,22 +94,6 @@
       # other macOS's defaults configuration.
       # ......
     };
-  };
-
-  # Set environment variables for GUI apps (launchd user session)
-  # Ensures nix-installed binaries are available to apps like Claude Desktop
-  launchd.user.envVariables = {
-    PATH = builtins.concatStringsSep ":" [
-      "/Users/kyle/.local/bin"
-      "/etc/profiles/per-user/kyle/bin"
-      "/run/current-system/sw/bin"
-      "/nix/var/nix/profiles/default/bin"
-      "/usr/local/bin"
-      "/usr/bin"
-      "/bin"
-      "/usr/sbin"
-      "/sbin"
-    ];
   };
 
   # Add ability to used TouchID for sudo authentication
