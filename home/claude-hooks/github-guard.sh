@@ -10,7 +10,7 @@ if [[ "$url" == *"github.com"* ]]; then
   "hookSpecificOutput": {
     "hookEventName": "PreToolUse",
     "permissionDecision": "deny",
-    "permissionDecisionReason": "GitHub URLs don't work with WebFetch (JavaScript-rendered). Use mcp__github__* MCP tools or the gh CLI instead."
+    "permissionDecisionReason": "GitHub URLs don't work with WebFetch (JavaScript-rendered). Use the gh CLI instead (gh api, gh pr view, gh issue view)."
   }
 }
 EOF
