@@ -15,6 +15,17 @@
     # CLAUDE_CODE_EFFORT_LEVEL = "max";
     # CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING = "1";
     CLAUDE_CODE_NO_FLICKER = "1";
+
+    # Route docker/docker-compose/balena build at the podman machine's API
+    # socket, so all three work without Docker Desktop or OrbStack. The path is
+    # deterministic: $TMPDIR (per-user, UID-derived, stable across reboots) +
+    # podman/<machine>-api.sock, so we build it at shell-source time with no
+    # `podman machine inspect` subprocess. `\$` keeps $TMPDIR literal in nix so
+    # the shell expands it. Requires `podman machine start` to be running.
+    # NOTE: the `podman/<name>-api.sock` layout is a podman v5 applehv internal;
+    # re-check with `podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}'`
+    # after a podman major bump or if the machine is renamed off the default.
+    DOCKER_HOST = "unix://\${TMPDIR}podman/podman-machine-default-api.sock";
   };
 
   home.packages = with pkgs; [
