@@ -479,11 +479,6 @@
     scrollback-limit = 100000000
   '';
 
-  home.file.".claude/hooks/github-guard.sh" = {
-    source = ./claude-hooks/github-guard.sh;
-    executable = true;
-  };
-
   home.file.".config/worktrunk/config.toml".text = ''
     # Worktree path: sibling directory with @ separator
     # e.g., ~/src/org/repo@feature-branch
