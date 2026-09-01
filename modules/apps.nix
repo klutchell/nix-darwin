@@ -118,6 +118,7 @@
       "magicquit"
       "mole-app"
       "monitorcontrol"
+      "multipass"
       "notion"
       "notion-calendar"
       "openvpn-connect"
