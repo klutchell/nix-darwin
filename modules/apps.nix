@@ -106,10 +106,8 @@
       "claude-code@latest"
       "cryptomator"
       # "docker-desktop"
-      "fliqlo"
       "ghostty"
       # "google-drive"
-      # "hazel"
       "iina"
       # "logi-options+"
       "league-of-legends" # installer only
@@ -129,7 +127,6 @@
       "signal"
       "spotify"
       "tailscale-app"
-      "telegram"
       "ungoogled-chromium"
       "visual-studio-code"
       "yubico-authenticator"
