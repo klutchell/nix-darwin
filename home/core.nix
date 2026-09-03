@@ -46,6 +46,7 @@
     podman # Program for managing pods, containers and container images
     podman-compose # Implementation of docker-compose with podman backend
     skopeo # A command line utility for various operations on container images and image repositories
+    sprite # Fly.io Sprites CLI — persistent, hardware-isolated microVM sandboxes
 
     # gnu coreutils
     coreutils
