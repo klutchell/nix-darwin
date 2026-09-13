@@ -126,6 +126,7 @@
       "setapp"
       "signal"
       "spotify"
+      "superduper"
       "tailscale-app"
       "ungoogled-chromium"
       "visual-studio-code"
