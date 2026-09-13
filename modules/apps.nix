@@ -108,6 +108,7 @@
       # "docker-desktop"
       "ghostty"
       # "google-drive"
+      "homebrew-app"
       "iina"
       # "logi-options+"
       "league-of-legends" # installer only
