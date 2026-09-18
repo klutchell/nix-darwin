@@ -118,6 +118,7 @@
       "notion"
       "notion-calendar"
       "openvpn-connect"
+      "stablyai/orca/orca"
       "podman-desktop"
       "protonvpn"
       "raycast"
