@@ -103,6 +103,7 @@
       "claude-code@latest"
       "cryptomator"
       # "docker-desktop"
+      "esphome-device-builder"
       "ghostty"
       # "google-drive"
       "homebrew-app"
