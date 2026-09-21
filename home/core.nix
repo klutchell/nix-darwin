@@ -162,10 +162,14 @@
     go = {
       enable = true;
       env = {
+        # Do not set GOBIN. Go persists this file setting, and no environment
+        # variable can unset it. pre-commit unsets GOBIN and points GOPATH at
+        # its own hook environment, so a persisted GOBIN sends every
+        # `language: golang` hook binary to the wrong directory.
+        # With GOBIN unset, `go install` uses $GOPATH/bin — the same path.
         GOPATH = [
           "${config.home.homeDirectory}/go"
         ];
-        GOBIN = "${config.home.homeDirectory}/go/bin";
       };
     };
 
