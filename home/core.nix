@@ -85,6 +85,7 @@
 
     # utils
     cowsay
+    devenv # Define packages, languages, services, tasks, secrets, and tooling once.
     fd # simple, fast alternative to find
     file
     glow # markdown previewer in terminal
