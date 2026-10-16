@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   system.stateVersion = 5;
   ids.gids.nixbld = 30000;
 
@@ -14,18 +10,8 @@
 
   # Auto upgrade nix package and the daemon service.
   nix.enable = true;
-  # nix.package = pkgs.nix;
 
   nixpkgs.overlays = [
-    (final: prev: {
-      inherit
-        (prev.lixPackageSets.stable)
-        nixpkgs-review
-        nix-eval-jobs
-        nix-fast-build
-        colmena
-        ;
-    })
     # (import ./overlays/nodejs-patch.nix)
     # (import ./overlays/balena-cli.nix)
     # (self: super: {
@@ -34,8 +20,6 @@
     #   nodejs-slim = super.nodejs-slim_22;
     # })
   ];
-
-  nix.package = pkgs.lixPackageSets.stable.lix;
 
   programs.nix-index.enable = true;
 
