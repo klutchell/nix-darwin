@@ -99,6 +99,19 @@
   # Add ability to used TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  # eMudhra intermediate key compromise (https://emudhra.we-have-a-problem.com/).
+  # Distrust the affected roots in /etc/ssl/certs/ca-certificates.crt
+  # (NIX_SSL_CERT_FILE). Remove once nixpkgs cacert reaches NSS 3.131.1.
+  security.pki.caCertificateBlacklist = [
+    # nixpkgs cacert trusts this root for S/MIME only.
+    "Comodo AAA Services root"
+    # https://bugzilla.mozilla.org/show_bug.cgi?id=2084101
+    "emSign ECC Root CA - G3"
+    # https://bugzilla.mozilla.org/show_bug.cgi?id=2083709
+    "emSign Root CA - C1"
+    "emSign ECC Root CA - C3"
+  ];
+
   # Create /etc/zshrc that loads the nix-darwin environment.
   # this is required if you want to use darwin's default shell - zsh
   programs.zsh.enable = true;
