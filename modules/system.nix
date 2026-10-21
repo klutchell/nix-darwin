@@ -1,4 +1,8 @@
-{pkgs, ...}:
+{
+  config,
+  pkgs,
+  ...
+}:
 ###################################################################################
 #
 #  macOS's System configuration
@@ -111,6 +115,21 @@
     "emSign Root CA - C1"
     "emSign ECC Root CA - C3"
   ];
+
+  # Apple's /usr/bin curl, git, and python3 read /etc/ssl/cert.pem, which
+  # macOS does not update. Serve the same blacklisted Mozilla set. Use the
+  # no-trust-rules bundle: a parser that ignores OpenSSL trust bits would
+  # read a distrusted root in ca-bundle.crt as trusted.
+  environment.etc."ssl/cert.pem" = {
+    source = "${pkgs.cacert.override {
+      blacklist = config.security.pki.caCertificateBlacklist;
+    }}/etc/ssl/certs/ca-no-trust-rules-bundle.crt";
+    # Apple's original file, and the copy with eMudhra roots removed by hand.
+    knownSha256Hashes = [
+      "9dae8d76e55cb08991f2b672d58999ea15560d910759c16b544f843bdffbb994"
+      "94b80bc956443b8083230861b07f4cdb5170ef4a1f84970dabab3dd526aceb07"
+    ];
+  };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   # this is required if you want to use darwin's default shell - zsh
