@@ -62,7 +62,7 @@
 
     # javascript & runtimes
     bun # Bun is a fast, modern package manager for JavaScript and TypeScript
-    nodejs_24 # A JavaScript runtime built on Chrome's V8 JavaScript engine
+    nodejs_26 # A JavaScript runtime built on Chrome's V8 JavaScript engine
     python3 # Python 3 interpreter; provides python, python3 + python-config (shadows Homebrew's python@3.x once nix leads PATH)
     uv # An extremely fast Python package and project manager, written in Rust
 
